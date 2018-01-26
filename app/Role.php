@@ -2,13 +2,10 @@
 
 namespace App;
 
-use Illuminate\Database\Eloquent\SoftDeletes;
 use Zizaco\Entrust\EntrustRole;
 
 class Role extends EntrustRole
 {
-    use SoftDeletes;
-
     /**
      * The attributes that are mass assignable.
      *

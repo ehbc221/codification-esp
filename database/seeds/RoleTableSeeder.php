@@ -12,25 +12,20 @@ class RoleTableSeeder extends Seeder
      */
     public function run()
     {
-        $role = [
+        $roles = [
             [
-                'name' => 'user',
-                'display_name' => 'Simple Utilisateur',
-                'description' => 'Un utilisateur connecté.'
+                'name' => 'student',
+                'display_name' => 'Étudiant',
+                'description' => 'Un Étudiant connecté.'
             ],
             [
                 'name' => 'admin',
                 'display_name' => 'Administrateurs',
-                'description' => 'Gestion des ressources liées aux administrateurs (et super administrateurs)'
-            ],
-            [
-                'name' => 'super-admin',
-                'display_name' => 'Super Administrateurs',
-                'description' => 'Gestion des ressources liées aux super administrateurs'
+                'description' => 'Gestion des ressources liées aux administrateurs.'
             ]
         ];
 
-        foreach ($role as $key => $value) {
+        foreach ($roles as $key => $value) {
             Role::create($value);
         }
     }

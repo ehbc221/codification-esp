@@ -24,6 +24,10 @@ Route::get('/home', 'HomeController@index')->name('home');
  * Admin Routes
  */
 Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'milldeware' => 'admin'], function () {
+
+    // Dashboard
+    Route::get('dashboard', 'DashboardController');
+
     Route::resource('batiments', 'BlockController', ['as' => 'blocks.']);
     Route::resource('directeurs-batiment', 'BlockDirectorController', ['as' => 'block-directors.']);
     Route::resource('codifications', 'CodificationController', ['as' => 'codifications.']);

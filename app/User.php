@@ -2,12 +2,14 @@
 
 namespace App;
 
+use Illuminate\Support\Facades\Auth;
+use Zizaco\Entrust\Traits\EntrustUserTrait;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
 {
-    use Notifiable;
+    use Notifiable, EntrustUserTrait;
 
     /**
      * The attributes that are mass assignable.
@@ -45,6 +47,20 @@ class User extends Authenticatable
     public function reservations()
     {
         return $this->hasMany('App\Reservation');
+    }
+
+    public function getRoleAttribute()
+    {
+        return $this->getRoleName()->display_name;
+    }
+
+    public function getRoleName()
+    {
+        return User::join('role_user', 'users.id', 'role_user.user_id')
+            ->join('roles', 'role_user.role_id', 'roles.id')
+            ->select('roles.display_name')
+            ->get()
+            ->first();
     }
 
 }

@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Concierge;
 
-use App\Models\Auth\User\User;
+use App\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
