@@ -64,7 +64,7 @@ class User extends Authenticatable
             ->first();
     }
 
-    public function getList(array $select = null, array $where = null, string $sortBy = null, string $sortType = 'ASC', int $limit = 15)
+    public static function getList(array $select = null, array $where = null, string $orderBy = null, string $orderType = null, int $limit = 15)
     {
         $fields = ['id', 'name', 'email', 'phone', 'national_identification_number', 'matriculation', 'confirmation_code', 'confirmed'];
         return User::join('role_user', 'users.id', 'role_user.user_id')
@@ -75,6 +75,9 @@ class User extends Authenticatable
                     if (!in_array($item, $fields)) {
                         return $query;
                     }
+                }
+                if (count($select) === 1 && $select[0] === 'list') {
+                    return $query->select($fields);
                 }
                 return $query->select($select);
             })
@@ -88,11 +91,21 @@ class User extends Authenticatable
                     $query = $query->where($key, $value);
                 }
             })
-            ->when($sortBy, function ($query) use($sortBy, $sortType) {
-                $sortType = (in_array(strtoupper($sortType), ['ASC', 'DESC'])) ? strtoupper($sortType) : 'DESC';
-                $sortBy = (in_array($sortBy, ['name', 'email', 'national_identification_number', 'matriculation', 'confirmed'])) ? $sortBy : 'updated_at';
-                return $query->sortBy($sortBy, $sortType);
+            ->when([$orderBy, $orderType], function ($query) use($orderBy, $orderType) {
+                $orderType = (in_array(strtoupper($orderType), ['ASC', 'DESC'])) ? strtoupper($orderType) : 'DESC';
+                $orderBy = (in_array($orderBy, ['name', 'email', 'national_identification_number', 'matriculation', 'confirmed'])) ? $orderBy : 'updated_at';
+                return $query->orderBy($orderBy, $orderType);
+            }, function ($query) {
+                return $query->orderBy('updated_at', 'DESC');
             })
+            ->paginate($limit);
+    }
+
+    public static function getUsersShortList($limit = 15)
+    {
+        return User::join('role_user', 'users.id', 'role_user.user_id')
+            ->join('roles', 'role_user.role_id', 'roles.id')
+            ->select('users.id as user_id', 'users.name as user_name', 'users.email as user_email', 'users.confirmed as user_confirmed', 'roles.display_name as role_display_name')
             ->paginate($limit);
     }
 

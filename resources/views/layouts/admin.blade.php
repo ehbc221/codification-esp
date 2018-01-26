@@ -16,6 +16,8 @@
         <link href="{{ asset('angle/vendor/animate.css/animate.min.css') }}" rel="stylesheet">
         <!-- WHIRL (spinners)-->
         <link href="{{ asset('angle/vendor/whirl/dist/whirl.css') }}" rel="stylesheet">
+        <!-- SWEETALERT-->
+        <link href="{{ asset('angle/vendor/sweetalert/dist/sweetalert.css') }}" rel="stylesheet">
         <!-- =============== PAGE VENDOR STYLES ===============-->
         <!-- =============== BOOTSTRAP STYLES ===============-->
         <link href="{{ asset('angle/app/css/bootstrap.css') }}" rel="stylesheet" id="bscss">
@@ -40,7 +42,7 @@
                 </h3>
                 <div class="row">
                     <div class="col-lg-12">
-                        <p>@yield('content')</p>
+                        @yield('content')
                     </div>
                 </div>
             </div>
@@ -69,11 +71,14 @@
         <script src="{{ asset('angle/vendor/jquery-localize-i18n/dist/jquery.localize.js') }}"></script>
     <!-- RTL demo-->
         <script src="{{ asset('angle/app/js/demo/demo-rtl.js') }}"></script>
+    <!-- SWEET ALERT -->
+        <script src="{{ asset('angle/vendor/sweetalert/dist/sweetalert2.all.min.js') }}"></script>
     <!-- =============== PAGE VENDOR SCRIPTS ===============-->
     <!-- =============== APP SCRIPTS ===============-->
         <script src="{{ asset('angle/app/js/app.js') }}"></script>
+        <script src="{{ asset('js/scripts.js') }}"></script>
     <!-- CUSTOM JS -->
-    @stack('scripts')
+        @stack('scripts')
     </body>
 
 </html>
