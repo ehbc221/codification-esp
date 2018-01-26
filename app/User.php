@@ -64,4 +64,36 @@ class User extends Authenticatable
             ->first();
     }
 
+    public function getList(array $select = null, array $where = null, string $sortBy = null, string $sortType = 'ASC', int $limit = 15)
+    {
+        $fields = ['id', 'name', 'email', 'phone', 'national_identification_number', 'matriculation', 'confirmation_code', 'confirmed'];
+        return User::join('role_user', 'users.id', 'role_user.user_id')
+            ->join('roles', 'role_user.role_id', 'roles.id')
+            ->when($select, function ($query) use($select, $fields) {
+                $select = array_unique($select);
+                foreach ($select as $item) {
+                    if (!in_array($item, $fields)) {
+                        return $query;
+                    }
+                }
+                return $query->select($select);
+            })
+            ->when($where, function ($query) use($where, $fields) {
+                foreach ($where as $key => $value) {
+                    if (!in_array($key, $fields)) {
+                        return $query;
+                    }
+                }
+                foreach ($where as $key => $value) {
+                    $query = $query->where($key, $value);
+                }
+            })
+            ->when($sortBy, function ($query) use($sortBy, $sortType) {
+                $sortType = (in_array(strtoupper($sortType), ['ASC', 'DESC'])) ? strtoupper($sortType) : 'DESC';
+                $sortBy = (in_array($sortBy, ['name', 'email', 'national_identification_number', 'matriculation', 'confirmed'])) ? $sortBy : 'updated_at';
+                return $query->sortBy($sortBy, $sortType);
+            })
+            ->paginate($limit);
+    }
+
 }
