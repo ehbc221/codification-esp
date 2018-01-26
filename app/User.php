@@ -51,14 +51,15 @@ class User extends Authenticatable
 
     public function getRoleAttribute()
     {
-        return $this->getRoleName()->display_name;
+        return $this->getRoleName();
     }
 
     public function getRoleName()
     {
         return User::join('role_user', 'users.id', 'role_user.user_id')
             ->join('roles', 'role_user.role_id', 'roles.id')
-            ->select('roles.display_name')
+            ->select('roles.name', 'roles.display_name')
+            ->where('users.id', Auth::user()->id)
             ->get()
             ->first();
     }

@@ -20,7 +20,7 @@ class RoleTableSeeder extends Seeder
             ],
             [
                 'name' => 'admin',
-                'display_name' => 'Administrateurs',
+                'display_name' => 'Administrateur',
                 'description' => 'Gestion des ressources liées aux administrateurs.'
             ]
         ];

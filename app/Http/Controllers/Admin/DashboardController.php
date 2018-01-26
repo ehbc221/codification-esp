@@ -9,7 +9,9 @@ class DashboardController extends Controller
 {
     public function __invoke()
     {
-        return view('admin.dashboard');
-    }
+        $controller_name = 'Dashboard';
+        $action_name = 'Accueil';
 
+        return view('admin.dashboard', compact(['controller_name', 'action_name']));
+    }
 }
