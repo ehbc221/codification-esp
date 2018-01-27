@@ -31,7 +31,10 @@
                     @foreach($departments as $department)
                         <tr>
                             <td>{{ $department->id }}</td>
-                            <td>{{ $department->name }}</td>
+                            <td>
+                                <div class="col-md-2"><span class="badge bg-gray-light">{{ $department->formations_count }} Formations</span></div>
+                                <div class="col-md-10">{{ $department->name }}</div>
+                            </td>
                             <td class="forms-delete">
                                 {!! Form::open(['route' => ['admin.departements.destroy', $department->id], 'method' => 'delete', 'class' => 'form-inline']) !!}
                                 {!! Form::token() !!}

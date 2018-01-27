@@ -2,11 +2,19 @@
 
 namespace App\Http\Controllers\Admin;
 
-use Illuminate\Http\Request;
+use App\Department;
+use App\Formation;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\FormationRequest;
+use Illuminate\Support\Facades\View;
 
 class FormationController extends Controller
 {
+    public function __construct()
+    {
+        View::share('controller_name', 'Formations');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -14,7 +22,10 @@ class FormationController extends Controller
      */
     public function index()
     {
-        //
+        $formations = Formation::getFormationsShortList();
+
+        $action_name = 'Liste';
+        return view('admin.formations.index', compact(['action_name', 'formations']));
     }
 
     /**
@@ -24,18 +35,32 @@ class FormationController extends Controller
      */
     public function create()
     {
-        //
+        $departments = Department::getDepartmentsOptionList();
+        $departments = $departments->mapWithKeys(function ($item) {
+            return [$item['id'] => $item['name']];
+        })->toArray();
+
+        $action_name = 'Ajouter';
+        return view('admin.formations.create', compact(['action_name', 'departments']));
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param FormationRequest $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(FormationRequest $request)
     {
-        //
+        $input = [
+            'name' => $request['name'],
+            'department_id' => $request['department_id']
+        ];
+
+        $formation = Formation::create($input);
+
+        return redirect()->route('admin.formations.show', ['id' => $formation->id])
+            ->with('success', 'Formation ajoutée avec succès.');
     }
 
     /**
@@ -46,7 +71,13 @@ class FormationController extends Controller
      */
     public function show($id)
     {
-        //
+        $formation = Formation::getFormation($id);
+
+        $success = (session('success')) ? session('success') : null;
+
+        $action_name = "Voir";
+        return view('admin.formations.show', compact(['action_name', 'formation']))
+            ->with('success', $success);
     }
 
     /**
@@ -57,19 +88,37 @@ class FormationController extends Controller
      */
     public function edit($id)
     {
-        //
+        $formation = Formation::findOrFail($id);
+
+        $departments = Department::getDepartmentsOptionList();
+        $departments = $departments->mapWithKeys(function ($item) {
+            return [$item['id'] => $item['name']];
+        })->toArray();
+
+        $action_name = 'Modifier';
+        return view('admin.formations.edit', compact(['action_name', 'formation', 'departments']));
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param FormationRequest $request
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(FormationRequest $request, $id)
     {
-        //
+        $formation = Formation::findOrFail($id);
+
+        $input = [
+            'name' => $request['name'],
+            'department_id' => $request['department_id']
+        ];
+
+        $formation->update($input);
+
+        return redirect()->route('admin.formations.show', ['id' => $formation->id])
+            ->with('success', 'Formation modifiée avec succès.');
     }
 
     /**
@@ -80,6 +129,11 @@ class FormationController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $formation = Formation::findOrFail($id);
+
+        $formation->delete();
+
+        return redirect()->route('admin.formations.index')
+            ->with('success', 'Formation supprimée avec succès.');
     }
 }

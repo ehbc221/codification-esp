@@ -20,10 +20,18 @@ class Department extends Model
         return $this->hasMany('App\Student');
     }
 
+    public static function getDepartmentsOptionList()
+    {
+        return Department::select('id', 'name')
+            ->OrderBy('name', 'asc')
+            ->get();
+    }
+
     public static function getDepartmentsShortList($limit = 15)
     {
         return Department::select('id', 'name')
             ->OrderBy('created_at', 'DESC')
+            ->withCount('formations')
             ->paginate($limit);
     }
 

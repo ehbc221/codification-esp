@@ -49,16 +49,17 @@
                 {!! Form::close() !!}
             </div>
         </div>
-        @endsection
+    </div>
+@endsection
 
-        @push('scripts')
-            <script type="text/javascript">
-                $(document).ready(function () {
-                    /*
-                        HANDLE ALERTS (SUCCESS + ERROR)
-                     */
-                    var has_alert_error = "<?php echo ($errors->any()) ? true : false; ?>";
-                    handleAlerts(has_alert_error, 'error', null);
-                });
-            </script>
-    @endpush
+@push('scripts')
+    <script type="text/javascript">
+        $(document).ready(function () {
+            /*
+                HANDLE ALERTS (SUCCESS + ERROR)
+             */
+            var has_alert_error = "<?php echo ($errors->any()) ? true : false; ?>";
+            handleAlerts(has_alert_error, 'error', null);
+        });
+    </script>
+@endpush
