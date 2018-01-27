@@ -33,6 +33,15 @@ class Formation extends Model
             ->first();
     }
 
+    public static function getFormationsOptionList()
+    {
+        return Formation::join('departments', 'formations.department_id', 'departments.id')
+            ->select('formations.id', 'formations.name as formation_name', 'departments.name as department_name')
+            ->OrderBy('departments.name', 'ASC')
+            ->OrderBy('formations.name', 'ASC')
+            ->get();
+    }
+
     public static function getFormationsShortList($limit = 15)
     {
         return Formation::join('departments', 'formations.department_id', 'departments.id')

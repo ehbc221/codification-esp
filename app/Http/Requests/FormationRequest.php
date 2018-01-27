@@ -37,7 +37,7 @@ class FormationRequest extends FormRequest
                 {
                     return [
                         'name' => 'required',
-                        'department_id' => 'exists:departments,id'
+                        'department_id' => 'required|exists:departments,id'
                     ];
                 }
             case 'PUT':
@@ -45,7 +45,7 @@ class FormationRequest extends FormRequest
                 {
                     return [
                         'name' => 'required',
-                        'department_id' => 'exists:departments,id'
+                        'department_id' => 'required|exists:departments,id'
                     ];
                 }
             default:

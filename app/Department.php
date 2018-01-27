@@ -23,7 +23,7 @@ class Department extends Model
     public static function getDepartmentsOptionList()
     {
         return Department::select('id', 'name')
-            ->OrderBy('name', 'asc')
+            ->OrderBy('name', 'ASC')
             ->get();
     }
 
