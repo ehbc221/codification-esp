@@ -2,12 +2,14 @@
 
 namespace App\Http\Requests;
 
+use App\Department;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Auth;
 
 class DepartmentRequest extends FormRequest
 {
     /**
-     * Determine if the user is authorized to make this request.
+     * Determine if the department is authorized to make this request.
      *
      * @return bool
      */
@@ -23,8 +25,30 @@ class DepartmentRequest extends FormRequest
      */
     public function rules()
     {
-        return [
-            //
-        ];
+        $department = Department::find($this->department);
+
+        switch($this->method()) {
+            case 'GET':
+            case 'DELETE':
+                {
+                    return [];
+                }
+            case 'POST':
+                {
+                    return [
+                        'name' => 'required',
+                    ];
+                }
+            case 'PUT':
+            case 'PATCH':
+                {
+                    return [
+                        'name' => 'required'
+                    ];
+                }
+            default:
+                break;
+        }
+        return [];
     }
 }

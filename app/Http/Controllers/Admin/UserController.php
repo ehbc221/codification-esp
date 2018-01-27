@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Requests\UserRequest;
 use App\Role;
 use App\User;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\View;
 use Ramsey\Uuid\Uuid;
@@ -78,14 +77,11 @@ class UserController extends Controller
     {
         $user = User::findOrFail($id);
 
-        $success = session('success');
-        if($success) {
-            return view('admin.users.show', compact(['user', 'page_subtitle']))
-                ->with('success', session('success'));
-        }
+        $success = (session('success')) ? session('success') : null;
 
         $action_name = "Voir";
-        return view('admin.users.show', compact(['action_name', 'user']));
+        return view('admin.users.show', compact(['action_name', 'user']))
+            ->with('success', $success);
     }
 
     /**

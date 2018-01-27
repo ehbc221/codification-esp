@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models;
+namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -18,6 +18,13 @@ class Department extends Model
     public function students()
     {
         return $this->hasMany('App\Student');
+    }
+
+    public static function getDepartmentsShortList($limit = 15)
+    {
+        return Department::select('id', 'name')
+            ->OrderBy('created_at', 'DESC')
+            ->paginate($limit);
     }
 
 }
