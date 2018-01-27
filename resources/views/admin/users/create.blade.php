@@ -17,7 +17,7 @@
                     <div class="row">
                         <div class="col-md-8 col-md-offset-2 col-sm-12">
                             <div class="form-group  {{ $errors->has('name') ? ' has-error' : '' }}">
-                                {!!  Form::label('name', 'Nom', ['class' => 'col-md-2 col-sm-2 control-label']) !!}
+                                {!!  Form::label('name', 'Nom <em class="text text-danger">*</em>', ['class' => 'col-md-2 col-sm-2 control-label'], false) !!}
                                 <div class="col-md-6 col-sm-10">
                                     {!! Form::text('name', null, ['class' => 'form-control', 'id' => 'name', 'value' => old('name'), 'required' => 'required', 'autofocus' => 'on']) !!}
 
@@ -33,7 +33,7 @@
                         </div>
                         <div class="col-md-8 col-md-offset-2 col-sm-12">
                             <div class="form-group  {{ $errors->has('email') ? ' has-error' : '' }}">
-                                {!!  Form::label('email', 'Email', ['class' => 'col-md-2 col-sm-2 control-label']) !!}
+                                {!!  Form::label('email', 'Email <em class="text text-danger">*</em>', ['class' => 'col-md-2 col-sm-2 control-label'], false) !!}
                                 <div class="col-md-6 col-sm-10">
                                     {!! Form::email('email', null, ['class' => 'form-control', 'id' => 'email', 'value' => old('email'), 'required' => 'required']) !!}
 
@@ -49,7 +49,7 @@
                         </div>
                         <div class="col-md-8 col-md-offset-2 col-sm-12">
                             <div class="form-group  {{ $errors->has('password') ? ' has-error' : '' }}">
-                                {!!  Form::label('password', 'Password', ['class' => 'col-md-2 col-sm-2 control-label']) !!}
+                                {!!  Form::label('password', 'Mot De Passe', ['class' => 'col-md-2 col-sm-2 control-label']) !!}
                                 <div class="col-md-6 col-sm-10">
                                     {!! Form::password('password', ['class' => 'form-control', 'id' => 'password', 'value' => old('password'), 'required' => 'required']) !!}
 
@@ -65,7 +65,7 @@
                         </div>
                         <div class="col-md-8 col-md-offset-2 col-sm-12">
                             <div class="form-group  {{ $errors->has('phone') ? ' has-error' : '' }}">
-                                {!!  Form::label('phone', 'Téléphone', ['class' => 'col-md-2 col-sm-2 control-label']) !!}
+                                {!!  Form::label('phone', 'Téléphone <em class="text text-danger">*</em>', ['class' => 'col-md-2 col-sm-2 control-label'], false) !!}
                                 <div class="col-md-6 col-sm-10">
                                     {!! Form::text('phone', null, ['class' => 'form-control', 'id' => 'phone', 'value' => old('phone'), 'required' => 'required']) !!}
 
@@ -80,14 +80,14 @@
                             </div>
                         </div>
                         <div class="col-md-8 col-md-offset-2 col-sm-12">
-                            <div class="form-group  {{ $errors->has('national_identification_number') ? ' has-error' : '' }}">
-                                {!!  Form::label('national_identification_number', 'CIN', ['class' => 'col-md-2 col-sm-2 control-label']) !!}
+                            <div class="form-group  {{ $errors->has('cin') ? ' has-error' : '' }}">
+                                {!!  Form::label('cin', 'CIN <em class="text text-danger">*</em>', ['class' => 'col-md-2 col-sm-2 control-label'], false) !!}
                                 <div class="col-md-6 col-sm-10">
-                                    {!! Form::text('national_identification_number', null, ['class' => 'form-control', 'id' => 'national_identification_number', 'value' => old('national_identification_number'), 'required' => 'required']) !!}
+                                    {!! Form::text('cin', null, ['class' => 'form-control', 'id' => 'cin', 'value' => old('cin'), 'required' => 'required']) !!}
 
-                                    @if ($errors->has('national_identification_number'))
+                                    @if ($errors->has('cin'))
                                         <div class="help-block">
-                                            @foreach($errors->get('national_identification_number') as $message)
+                                            @foreach($errors->get('cin') as $message)
                                                 <strong>{{ $message }}</strong>
                                             @endforeach
                                         </div>
@@ -97,7 +97,7 @@
                         </div>
                         <div class="col-md-8 col-md-offset-2 col-sm-12">
                             <div class="form-group  {{ $errors->has('matriculation') ? ' has-error' : '' }}">
-                                {!!  Form::label('matriculation', 'Matriculation', ['class' => 'col-md-2 col-sm-2 control-label']) !!}
+                                {!!  Form::label('matriculation', 'Matriculation <em class="text text-danger">*</em>', ['class' => 'col-md-2 col-sm-2 control-label'], false) !!}
                                 <div class="col-md-6 col-sm-10">
                                     {!! Form::text('matriculation', null, ['class' => 'form-control', 'id' => 'matriculation', 'value' => old('matriculation'), 'required' => 'required']) !!}
 

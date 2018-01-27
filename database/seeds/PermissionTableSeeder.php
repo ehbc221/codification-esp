@@ -14,30 +14,31 @@ class PermissionTableSeeder extends Seeder
     {
         $permission = [
             [
-                'name' => 'user-index',
-                'display_name' => 'Utilisateur - Liste',
-                'description' => 'Utilisateur - peut voir une liste d\'objets'
+                'name' => 'student-index',
+                'display_name' => 'Etudiant - Liste',
+                'description' => 'Etudiant - peut voir une liste d\'objets'
             ],
             [
-                'name' => 'user-create',
-                'display_name' => 'Utilisareur - Créer',
-                'description' => 'Utilisareur - peut créer un objet'
+                'name' => 'student-create',
+                'display_name' => 'Etudiant - Créer',
+                'description' => 'Etudiant - peut créer un objet'
             ],
             [
-                'name' => 'user-update',
-                'display_name' => 'Utilisareur - Modifier',
-                'description' => 'Utilisareur - peut modifier un objet'
+                'name' => 'student-update',
+                'display_name' => 'Etudiant - Modifier',
+                'description' => 'Etudiant - peut modifier un objet'
             ],
             [
-                'name' => 'user-delete',
-                'display_name' => 'Utilisareur - Supprimer',
-                'description' => 'Utilisareur - peut supprimer un objet'
+                'name' => 'student-delete',
+                'display_name' => 'Etudiant - Supprimer',
+                'description' => 'Etudiant - peut supprimer un objet'
             ],
             [
-                'name' => 'user-show',
-                'display_name' => 'Utilisateur - Voir',
-                'description' => 'Utilisateur - peut voir un objet'
+                'name' => 'student-show',
+                'display_name' => 'Etudiant - Voir',
+                'description' => 'Etudiant - peut voir un objet'
             ],
+
             [
                 'name' => 'admin-index',
                 'display_name' => 'Admin - Liste',
@@ -62,31 +63,6 @@ class PermissionTableSeeder extends Seeder
                 'name' => 'admin-show',
                 'display_name' => 'Admin - Voir',
                 'description' => 'Admin - peut voir un objet'
-            ],
-            [
-                'name' => 'super-admin-index',
-                'display_name' => 'Super Admin - Liste',
-                'description' => 'Super Admin - peut voir une liste d\'objets'
-            ],
-            [
-                'name' => 'super-admin-create',
-                'display_name' => 'Super Admin - Créer',
-                'description' => 'Super Admin - peut créer un objet'
-            ],
-            [
-                'name' => 'super-admin-update',
-                'display_name' => 'Super Admin - Modifier',
-                'description' => 'Super Admin - peut modifier un objet'
-            ],
-            [
-                'name' => 'super-admin-delete',
-                'display_name' => 'Super Admin - Supprimer',
-                'description' => 'Super Admin - peut supprimer un objet'
-            ],
-            [
-                'name' => 'super-admin-show',
-                'display_name' => 'Super Admin - Voir',
-                'description' => 'Super Admin - peut voir un objet'
             ]
         ];
 

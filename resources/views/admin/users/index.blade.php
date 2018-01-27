@@ -9,7 +9,7 @@
                 </div>
                 <div class="col-md-12">
                     <div class="col-md-1 col-md-offset-11">
-                        <a href="{{ route('admin.utilisateurs.create') }}"><button class="btn btn-info"><i class="fa fa-plus-circle"></i> Ajouter</button></a>
+                        <a href="{{ route('admin.utilisateurs.create') }}"><button class="btn btn-info"><i class="fa fa-plus"></i> Ajouter</button></a>
                     </div>
                 </div>
             </div>
@@ -38,10 +38,10 @@
                                 {!! Form::token() !!}
                                 {!! Form::hidden('id', $user->user_id) !!}
                                 <span>
-                                    <a href="{{ route('admin.utilisateurs.show', ['id' => $user->user_id]) }}"><button class="btn btn-default" title="Voir"><i class="fa fa-eye"></i> Voir</button></a>
+                                    <a href="{{ route('admin.utilisateurs.show', ['id' => $user->user_id]) }}"><span class="btn btn-default" title="Voir"><i class="fa fa-eye"></i> Voir</span></a>
                                 </span>
                                 <span>
-                                    <a href="{{ route('admin.utilisateurs.edit', ['id' => $user->user_id]) }}"><button class="btn btn-default" title="Modifier"><i class="fa fa-pencil"></i> Modifier</button></a>
+                                    <a href="{{ route('admin.utilisateurs.edit', ['id' => $user->user_id]) }}"><span class="btn btn-default" title="Modifier"><i class="fa fa-pencil"></i> Modifier</span></a>
                                 </span>
                                 <span>
                                     <span class="btn btn-danger" id="button-delete" title="Supprimer"><i class="fa fa-trash"></i> Supprimer</span>

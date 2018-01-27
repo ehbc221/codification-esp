@@ -153,3 +153,17 @@
     </div>
     <!-- END Sidebar (left)-->
 </aside>
+
+@push('scripts')
+    <script type="text/javascript">
+        /*
+            ADD CLASS ACTIVE TO NAV LI
+         */
+        var page_title = "<?php echo $controller_name; ?>", li = $('li');
+        li.each(function () {
+            if ($(this).find('span')[0] && $(this).find('span')[0].innerHTML === page_title) {
+                $(this).addClass('active');
+            }
+        });
+    </script>
+@endpush

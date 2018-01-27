@@ -25,7 +25,7 @@ class UsersTableSeeder extends Seeder
             if(starts_with($permission->name, 'admin')) {
                 $permissions_for_admin->push($permission);
             }
-            else if(starts_with($permission->name, 'user')) {
+            else if(starts_with($permission->name, 'student')) {
                 $permissions_for_student->push($permission);
             }
         }
@@ -44,7 +44,7 @@ class UsersTableSeeder extends Seeder
                 'email' => 'pengriffey@gmail.com',
                 'password' => bcrypt('pengriffey'),
                 'phone' => '+221-77-777-77-77',
-                'national_identification_number' => 'pengriffey221',
+                'cin' => 'pengriffey221',
                 'matriculation' => 'pengriffey221',
                 'confirmation_code' => \Ramsey\Uuid\Uuid::uuid4(),
                 'confirmed' => true,
@@ -56,7 +56,7 @@ class UsersTableSeeder extends Seeder
                 'email' => 'blockdirector@gmail.com',
                 'password' => bcrypt('blockdirector'),
                 'phone' => '+221-78-888-88-88',
-                'national_identification_number' => 'blockdirector',
+                'cin' => 'blockdirector',
                 'matriculation' => 'blockdirector221',
                 'confirmation_code' => \Ramsey\Uuid\Uuid::uuid4(),
                 'confirmed' => true,
@@ -68,7 +68,7 @@ class UsersTableSeeder extends Seeder
                 'email' => 'concierge-1@gmail.com',
                 'password' => bcrypt('concierge'),
                 'phone' => '+221-79-999-99-91',
-                'national_identification_number' => 'concierge-1-221',
+                'cin' => 'concierge-1-221',
                 'matriculation' => 'concierge-1-221',
                 'confirmation_code' => \Ramsey\Uuid\Uuid::uuid4(),
                 'confirmed' => true,
@@ -80,7 +80,7 @@ class UsersTableSeeder extends Seeder
                 'email' => 'concierge-2@gmail.com',
                 'password' => bcrypt('concierge'),
                 'phone' => '+221-79-999-99-92',
-                'national_identification_number' => 'concierge-2-221',
+                'cin' => 'concierge-2-221',
                 'matriculation' => 'concierge-2-221',
                 'confirmation_code' => \Ramsey\Uuid\Uuid::uuid4(),
                 'confirmed' => true,
@@ -92,7 +92,7 @@ class UsersTableSeeder extends Seeder
                 'email' => 'concierge-3@gmail.com',
                 'password' => bcrypt('concierge'),
                 'phone' => '+221-79-999-99-93',
-                'national_identification_number' => 'concierge-3-221',
+                'cin' => 'concierge-3-221',
                 'matriculation' => 'concierge-3-221',
                 'confirmation_code' => \Ramsey\Uuid\Uuid::uuid4(),
                 'confirmed' => true,
@@ -104,7 +104,7 @@ class UsersTableSeeder extends Seeder
                 'email' => 'concierge-4@gmail.com',
                 'password' => bcrypt('concierge'),
                 'phone' => '+221-79-999-99-94',
-                'national_identification_number' => 'concierge-4-221',
+                'cin' => 'concierge-4-221',
                 'matriculation' => 'concierge-4-221',
                 'confirmation_code' => \Ramsey\Uuid\Uuid::uuid4(),
                 'confirmed' => true,
@@ -116,7 +116,7 @@ class UsersTableSeeder extends Seeder
                 'email' => 'concierge-5@gmail.com',
                 'password' => bcrypt('concierge'),
                 'phone' => '+221-79-999-99-95',
-                'national_identification_number' => 'concierge-5-221',
+                'cin' => 'concierge-5-221',
                 'matriculation' => 'concierge-5-221',
                 'confirmation_code' => \Ramsey\Uuid\Uuid::uuid4(),
                 'confirmed' => true,
@@ -128,7 +128,7 @@ class UsersTableSeeder extends Seeder
                 'email' => 'concierge-6@gmail.com',
                 'password' => bcrypt('concierge'),
                 'phone' => '+221-79-999-99-96',
-                'national_identification_number' => 'concierge-6-221',
+                'cin' => 'concierge-6-221',
                 'matriculation' => 'concierge-6-221',
                 'confirmation_code' => \Ramsey\Uuid\Uuid::uuid4(),
                 'confirmed' => true,
@@ -148,7 +148,7 @@ class UsersTableSeeder extends Seeder
                 'email' => $faker->safeEmail,
                 'password' => bcrypt('passer1234'),
                 'phone' => $faker->phoneNumber,
-                'national_identification_number' => str_shuffle(trim($faker->text(20))),
+                'cin' => str_shuffle(trim($faker->text(20))),
                 'matriculation' => str_shuffle(trim($faker->text(20))),
                 'confirmation_code' => \Ramsey\Uuid\Uuid::uuid4(),
                 'confirmed' => true,

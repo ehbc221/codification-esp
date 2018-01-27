@@ -17,7 +17,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'phone', 'national_identification_number', 'matriculation'
+        'name', 'email', 'password', 'phone', 'cin', 'matriculation'
     ];
 
     /**
@@ -66,7 +66,7 @@ class User extends Authenticatable
 
     public static function getList(array $select = null, array $where = null, string $orderBy = null, string $orderType = null, int $limit = 15)
     {
-        $fields = ['id', 'name', 'email', 'phone', 'national_identification_number', 'matriculation', 'confirmation_code', 'confirmed'];
+        $fields = ['id', 'name', 'email', 'phone', 'cin', 'matriculation', 'confirmation_code', 'confirmed'];
         return User::join('role_user', 'users.id', 'role_user.user_id')
             ->join('roles', 'role_user.role_id', 'roles.id')
             ->when($select, function ($query) use($select, $fields) {
@@ -93,7 +93,7 @@ class User extends Authenticatable
             })
             ->when([$orderBy, $orderType], function ($query) use($orderBy, $orderType) {
                 $orderType = (in_array(strtoupper($orderType), ['ASC', 'DESC'])) ? strtoupper($orderType) : 'DESC';
-                $orderBy = (in_array($orderBy, ['name', 'email', 'national_identification_number', 'matriculation', 'confirmed'])) ? $orderBy : 'updated_at';
+                $orderBy = (in_array($orderBy, ['name', 'email', 'cin', 'matriculation', 'confirmed'])) ? $orderBy : 'updated_at';
                 return $query->orderBy($orderBy, $orderType);
             }, function ($query) {
                 return $query->orderBy('updated_at', 'DESC');
@@ -106,6 +106,7 @@ class User extends Authenticatable
         return User::join('role_user', 'users.id', 'role_user.user_id')
             ->join('roles', 'role_user.role_id', 'roles.id')
             ->select('users.id as user_id', 'users.name as user_name', 'users.email as user_email', 'users.confirmed as user_confirmed', 'roles.display_name as role_display_name')
+            ->OrderBy('users.created_at', 'DESC')
             ->paginate($limit);
     }
 

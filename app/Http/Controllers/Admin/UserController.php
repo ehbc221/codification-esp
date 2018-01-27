@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Http\Requests\UserRequest;
+use App\Role;
 use App\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -12,7 +14,7 @@ class UserController extends Controller
 {
     public function __construct()
     {
-        View::share('controller_name', 'Utilisateurs');
+        View::share('controller_name', 'Comptes');
     }
 
     /**
@@ -22,10 +24,9 @@ class UserController extends Controller
      */
     public function index()
     {
-        $action_name = 'Liste';
-
         $users = User::getUsersShortList();
 
+        $action_name = 'Liste';
         return view('admin.users.index', compact(['action_name', 'users']));
     }
 
@@ -37,30 +38,33 @@ class UserController extends Controller
     public function create()
     {
         $action_name = 'Ajouter';
-
         return view('admin.users.create', compact(['action_name']));
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param UserRequest $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(UserRequest $request)
     {
-        $input['name'] = $request['name'];
-        $input['email'] = $request['email'];
-        $input['password'] = $request['password'];
-        $input['confirm_password'] = $request['confirm_password'];
-        $input['phone'] = $request['phone'];
-        $input['national_identification_number'] = $request['national_identification_number'];
-        $input['matriculation'] = $request['matriculation'];
-        $input['confirmation_code'] = Uuid::uuid4();
+        $input = [
+            'name' => $request['name'],
+            'email' => $request['email'],
+            'password' => bcrypt($request['password']),
+            'phone' => $request['phone'],
+            'cin' => $request['cin'],
+            'matriculation' => $request['matriculation'],
+            'confirmation_code' => Uuid::uuid4()
+        ];
 
         $user = User::create($input);
 
-        return redirect()->route('users.show', ['id' => $user->id])
+        $role_student = Role::getRole('student');
+        $user->attachRole($role_student);
+
+        return redirect()->route('admin.utilisateurs.show', ['id' => $user->id])
             ->with('success', 'Utilisateur ajouté avec succès.');
     }
 
@@ -74,15 +78,14 @@ class UserController extends Controller
     {
         $user = User::findOrFail($id);
 
-        $page_subtitle = "Voir";
-
         $success = session('success');
         if($success) {
-            return view('backend.users.show', compact(['user', 'page_subtitle']))
+            return view('admin.users.show', compact(['user', 'page_subtitle']))
                 ->with('success', session('success'));
         }
 
-        return view('admin.users.show', compact(['user', 'page_subtitle']));
+        $action_name = "Voir";
+        return view('admin.users.show', compact(['action_name', 'user']));
     }
 
     /**
@@ -93,34 +96,35 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        $action_name = 'Modifier';
-
         $user = User::findOrFail($id);
 
+        $action_name = 'Modifier';
         return view('admin.users.edit', compact(['action_name', 'user']));
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param UserRequest $request
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UserRequest $request, $id)
     {
-        $input['name'] = $request['name'];
-        $input['email'] = $request['email'];
-        $input['password'] = $request['password'];
-        $input['confirm_password'] = $request['confirm_password'];
-        $input['phone'] = $request['phone'];
-        $input['national_identification_number'] = $request['national_identification_number'];
-        $input['matriculation'] = $request['matriculation'];
-
         $user = User::findOrFail($id);
+
+        $input = [
+            'name' => $request['name'],
+            'email' => $request['email'],
+            'phone' => $request['phone'],
+            'cin' => $request['cin'],
+            'matriculation' => $request['matriculation']
+        ];
+        if (!empty($request['password'])) $input['password'] = bcrypt($request['password']);
+
         $user->update($input);
 
-        return redirect()->route('users.show', ['id' => $user->id])
+        return redirect()->route('admin.utilisateurs.show', ['id' => $user->id])
             ->with('success', 'Utilisateur modifié avec succès.');
     }
 
