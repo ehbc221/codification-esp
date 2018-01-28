@@ -76,7 +76,7 @@ class Room extends Model
     {
         $rooms = Room::getRoomsOptionList();
         $rooms = $rooms->mapWithKeys(function ($item) {
-            return [$item['id'] => $item['name'] = $item['lane_name'] . ' (' . $item['block_name'] . ' - ' . $item['floor_number'] . ')'];
+            return [$item['id'] => $item['name'] = $item['room_number'] . ' (' . $item['block_name'] . ' - ' . $item['floor_number'] . ' - ' . $item['lane_name'] . ')'];
         })->toArray();
         return $rooms;
     }

@@ -29,9 +29,9 @@ class Position extends Model
     {
         return Position::join('rooms', 'positions.room_id', 'rooms.id')
             ->join('lanes', 'rooms.lane_id', 'lanes.id')
-            ->join('floors', 'rooms.floor_id', 'floors.id')
+            ->join('floors', 'lanes.floor_id', 'floors.id')
             ->join('blocks', 'floors.block_id', 'blocks.id')
-            ->select('positions.id', 'positions.number as position_number', 'rooms.name as room_name', 'lanes.name as lane_name', 'floors.number as floor_number', 'blocks.name as block_name')
+            ->select('positions.id', 'positions.number as position_number', 'rooms.number as room_number', 'lanes.name as lane_name', 'floors.number as floor_number', 'blocks.name as block_name')
             ->where('positions.id', $id)
             ->first();
     }
@@ -40,12 +40,12 @@ class Position extends Model
     {
         return Position::join('rooms', 'positions.room_id', 'rooms.id')
             ->join('lanes', 'rooms.lane_id', 'lanes.id')
-            ->join('floors', 'rooms.floor_id', 'floors.id')
+            ->join('floors', 'lanes.floor_id', 'floors.id')
             ->join('blocks', 'floors.block_id', 'blocks.id')
-            ->select('positions.id', 'positions.number as position_number', 'rooms.name as room_name', 'lanes.name as lane_name', 'floors.number as floor_number', 'blocks.name as block_name')
+            ->select('positions.id', 'positions.number as position_number', 'rooms.number as room_number', 'lanes.name as lane_name', 'floors.number as floor_number', 'blocks.name as block_name')
             ->OrderBy('blocks.name', 'ASC')
             ->OrderBy('floors.number', 'ASC')
-            ->OrderBy('rooms.name', 'ASC')
+            ->OrderBy('rooms.number', 'ASC')
             ->OrderBy('positions.number', 'ASC')
             ->get();
     }
@@ -54,14 +54,13 @@ class Position extends Model
     {
         return Position::join('rooms', 'positions.room_id', 'rooms.id')
             ->join('lanes', 'rooms.lane_id', 'lanes.id')
-            ->join('floors', 'rooms.floor_id', 'floors.id')
+            ->join('floors', 'lanes.floor_id', 'floors.id')
             ->join('blocks', 'floors.block_id', 'blocks.id')
-            ->select('positions.id', 'positions.number as position_number', 'rooms.name as room_name', 'lanes.name as lane_name', 'floors.number as floor_number', 'blocks.name as block_name')
+            ->select('positions.id', 'positions.number as position_number', 'rooms.number as room_number', 'lanes.name as lane_name', 'floors.number as floor_number', 'blocks.name as block_name')
             ->OrderBy('blocks.name', 'ASC')
             ->OrderBy('floors.number', 'ASC')
-            ->OrderBy('rooms.name', 'ASC')
+            ->OrderBy('rooms.number', 'ASC')
             ->orDerBy('positions.number', 'DESC')
-            ->withCount('positions')
             ->paginate($limit);
     }
 
@@ -69,7 +68,7 @@ class Position extends Model
     {
         $positions = Position::getPositionsOptionList();
         $positions = $positions->mapWithKeys(function ($item) {
-            return [$item['id'] => $item['name'] = $item['room_name'] . ' (' . $item['block_name'] . ' - ' . $item['floor_number'] . $item['lane_name'] . ')'];
+            return [$item['id'] => $item['name'] = $item['room_number'] . ' (' . $item['block_name'] . ' - ' . $item['floor_number'] . $item['lane_name'] . ')'];
         })->toArray();
         return $positions;
     }

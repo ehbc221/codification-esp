@@ -151,7 +151,7 @@ class UsersTableSeeder extends Seeder
                 'cin' => str_shuffle(trim($faker->text(20))),
                 'matriculation' => str_shuffle(trim($faker->text(20))),
                 'confirmation_code' => \Ramsey\Uuid\Uuid::uuid4(),
-                'confirmed' => true,
+                'confirmed' => (($i % 15) == 0) ? false : true,
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now(),
             ];

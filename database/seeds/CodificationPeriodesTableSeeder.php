@@ -3,7 +3,7 @@
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
-class CodificationPeriodesSeeder extends Seeder
+class CodificationPeriodesTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.

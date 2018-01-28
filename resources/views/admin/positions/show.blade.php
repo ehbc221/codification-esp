@@ -24,7 +24,7 @@
                                 <div class="form-group">
                                     <label class="col-md-2 col-sm-2 control-label">Chambre</label>
                                     <div class="col-md-6 col-sm-10">
-                                        <div class="form-control">{{ $position->room_name }}</div>
+                                        <div class="form-control">{{ $position->room_number }}</div>
                                     </div>
                                 </div>
                             </div>
