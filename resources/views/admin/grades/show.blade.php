@@ -16,13 +16,13 @@
                         <div class="row">
                             <div class="col-md-8 col-md-offset-2 col-sm-12">
                                 <div class="form-group">
-                                    <label class="col-md-2 col-sm-2 control-label">Nom</label>
+                                    <label class="col-md-2 col-sm-2 control-label">Numéro</label>
                                     <div class="col-md-6 col-sm-10">
                                         <div class="form-control">{{ $grade->grade_number }}</div>
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label class="col-md-2 col-sm-2 control-label">Département</label>
+                                    <label class="col-md-2 col-sm-2 control-label">Formation</label>
                                     <div class="col-md-6 col-sm-10">
                                         <div class="form-control">{{ $grade->formation_name }}</div>
                                     </div>

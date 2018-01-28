@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Auth;
 class FormationRequest extends FormRequest
 {
     /**
-     * Determine if the formation is authorized to make this request.
+     * Determine if the user is authorized to make this request.
      *
      * @return bool
      */

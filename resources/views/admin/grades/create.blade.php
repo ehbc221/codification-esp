@@ -17,7 +17,7 @@
                     <div class="row">
                         <div class="col-md-8 col-md-offset-2 col-sm-12">
                             <div class="form-group  {{ $errors->has('number') ? ' has-error' : '' }}">
-                                {!!  Form::label('number', 'Nom <em class="text text-danger">*</em>', ['class' => 'col-md-2 col-sm-2 control-label'], false) !!}
+                                {!!  Form::label('number', 'Numéro <em class="text text-danger">*</em>', ['class' => 'col-md-2 col-sm-2 control-label'], false) !!}
                                 <div class="col-md-6 col-sm-10">
                                     {!! Form::number('number', null, ['class' => 'form-control', 'id' => 'number', 'value' => old('number'), 'required' => 'required', 'autofocus' => 'on']) !!}
 

@@ -2,7 +2,9 @@
 
 namespace App\Http\Requests;
 
+use App\Block;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Auth;
 
 class BlockRequest extends FormRequest
 {
@@ -23,8 +25,28 @@ class BlockRequest extends FormRequest
      */
     public function rules()
     {
-        return [
-            //
-        ];
+        switch($this->method()) {
+            case 'GET':
+            case 'DELETE':
+                {
+                    return [];
+                }
+            case 'POST':
+                {
+                    return [
+                        'name' => 'required|unique:blocks,name',
+                    ];
+                }
+            case 'PUT':
+            case 'PATCH':
+                {
+                    return [
+                        'name' => 'required|unique:blocks,name'
+                    ];
+                }
+            default:
+                break;
+        }
+        return [];
     }
 }

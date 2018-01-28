@@ -19,7 +19,7 @@
 
                         <div class="col-md-8 col-md-offset-2 col-sm-12">
                             <div class="form-group  {{ $errors->has('number') ? ' has-error' : '' }}">
-                                {!!  Form::label('number', 'Nom <em class="text text-danger">*</em>', ['class' => 'col-md-2 col-sm-2 control-label'], false) !!}
+                                {!!  Form::label('number', 'Numéro <em class="text text-danger">*</em>', ['class' => 'col-md-2 col-sm-2 control-label'], false) !!}
                                 <div class="col-md-6 col-sm-10">
                                     {!! Form::number('number', null, ['class' => 'form-control', 'id' => 'number', 'value' => old('number'), 'required' => 'required', 'autofocus' => 'on']) !!}
 
@@ -33,9 +33,9 @@
                                 </div>
                             </div>
                             <div class="form-group  {{ $errors->has('formation_id') ? ' has-error' : '' }}">
-                                {!!  Form::label('formation_id', 'Département <em class="text text-danger">*</em>', ['class' => 'col-md-2 col-sm-2 control-label'], false) !!}
+                                {!!  Form::label('formation_id', 'Formation <em class="text text-danger">*</em>', ['class' => 'col-md-2 col-sm-2 control-label'], false) !!}
                                 <div class="col-md-6 col-sm-10">
-                                    {!! Form::select('formation_id', $formations, old('formation_id'), ['class' => 'form-control', 'id' => 'formation_id', 'placeholder' => 'Sélectionnez un batiment...', 'required' => 'required']) !!}
+                                    {!! Form::select('formation_id', $formations, old('formation_id'), ['class' => 'form-control', 'id' => 'formation_id', 'placeholder' => 'Sélectionnez une formation...', 'required' => 'required']) !!}
 
                                     @if ($errors->has('formation_id'))
                                         <div class="help-block">

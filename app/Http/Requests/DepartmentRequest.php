@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Auth;
 class DepartmentRequest extends FormRequest
 {
     /**
-     * Determine if the department is authorized to make this request.
+     * Determine if the user is authorized to make this request.
      *
      * @return bool
      */
@@ -25,8 +25,6 @@ class DepartmentRequest extends FormRequest
      */
     public function rules()
     {
-        $department = Department::find($this->department);
-
         switch($this->method()) {
             case 'GET':
             case 'DELETE':
@@ -36,14 +34,14 @@ class DepartmentRequest extends FormRequest
             case 'POST':
                 {
                     return [
-                        'name' => 'required',
+                        'name' => 'required|unique:departments,name',
                     ];
                 }
             case 'PUT':
             case 'PATCH':
                 {
                     return [
-                        'name' => 'required'
+                        'name' => 'required|unique:departments,name'
                     ];
                 }
             default:
