@@ -56,7 +56,7 @@ class Lane extends Model
     {
         $lanes = Lane::getLanesOptionList();
         $lanes = $lanes->mapWithKeys(function ($item) {
-            return [$item['id'] => $item['name'] = $item['floor_number'] . ' (' . $item['block_name'] . ')'];
+            return [$item['id'] => $item['name'] = $item['lane_name'] . ' (' . $item['block_name'] . ' - ' . $item['floor_number'] . ')'];
         })->toArray();
         return $lanes;
     }
