@@ -15,13 +15,13 @@ class CreateRoomsTable extends Migration
     {
         Schema::create('rooms', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name');
+            $table->smallInteger('number');
             $table->integer('lane_id')->unsigned();
             $table->timestamps();
 
             $table->foreign('lane_id')->references('id')->on('lanes');
 
-            $table->unique(['name', 'lane_id']);
+            $table->unique(['number', 'lane_id']);
         });
     }
 

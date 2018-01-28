@@ -28,38 +28,48 @@
                         <th class="col-md-3">Actions</th>
                     </tr>
                     </thead>
-                    <tbody>
-                    @foreach($lanes as $lane)
+                    @if($lanes->isEmpty())
+                        <tbody>
                         <tr>
-                            <td>{{ $lane->id }}</td>
-                            <td>
-                                <div class="col-md-2"><span class="badge bg-gray-light">{{ $lane->rooms_count }} Chambres</span></div>
-                                <div class="col-md-10">{{ $lane->lane_name }}</div>
-                            </td>
-                            <td>{{ $lane->floor_number }}</td>
-                            <td class="forms-delete">
-                                {!! Form::open(['route' => ['admin.couloirs.destroy', $lane->id], 'method' => 'delete', 'class' => 'form-inline']) !!}
-                                {!! Form::token() !!}
-                                {!! Form::hidden('id', $lane->id) !!}
-                                <span>
-                                    <a href="{{ route('admin.couloirs.show', ['id' => $lane->id]) }}"><span class="btn btn-default" title="Voir"><i class="fa fa-eye"></i> Voir</span></a>
-                                </span>
-                                <span>
-                                    <a href="{{ route('admin.couloirs.edit', ['id' => $lane->id]) }}"><span class="btn btn-default" title="Modifier"><i class="fa fa-pencil"></i> Modifier</span></a>
-                                </span>
-                                <span>
-                                    <span class="btn btn-danger" id="button-delete" title="Supprimer"><i class="fa fa-trash"></i> Supprimer</span>
-                                </span>
-                                {!! Form::close() !!}
+                            <td colspan="4">
+                                <h3 class="text text-center text-danger"><i class="fa fa-info-circle"></i> Aucun couloir à afficher.</h3>
                             </td>
                         </tr>
-                    @endforeach
-                    </tbody>
-                    <tfoot class="bg-gray-lighter">
-                    <tr>
-                        <td class="text text-center" colspan="6">{{ $lanes->links() }}</td>
-                    </tr>
-                    </tfoot>
+                        </tbody>
+                    @else
+                        <tbody>
+                        @foreach($lanes as $lane)
+                            <tr>
+                                <td>{{ $lane->id }}</td>
+                                <td>
+                                    <div class="col-md-2"><span class="badge bg-gray-light">{{ $lane->rooms_count }} Chambres</span></div>
+                                    <div class="col-md-10">{{ $lane->lane_name }}</div>
+                                </td>
+                                <td>{{ $lane->floor_number }}</td>
+                                <td class="forms-delete">
+                                    {!! Form::open(['route' => ['admin.couloirs.destroy', $lane->id], 'method' => 'delete', 'class' => 'form-inline']) !!}
+                                    {!! Form::token() !!}
+                                    {!! Form::hidden('id', $lane->id) !!}
+                                    <span>
+                                        <a href="{{ route('admin.couloirs.show', ['id' => $lane->id]) }}"><span class="btn btn-default" title="Voir"><i class="fa fa-eye"></i> Voir</span></a>
+                                    </span>
+                                    <span>
+                                        <a href="{{ route('admin.couloirs.edit', ['id' => $lane->id]) }}"><span class="btn btn-default" title="Modifier"><i class="fa fa-pencil"></i> Modifier</span></a>
+                                    </span>
+                                    <span>
+                                        <span class="btn btn-danger" id="button-delete" title="Supprimer"><i class="fa fa-trash"></i> Supprimer</span>
+                                    </span>
+                                    {!! Form::close() !!}
+                                </td>
+                            </tr>
+                        @endforeach
+                        </tbody>
+                        <tfoot class="bg-gray-lighter">
+                        <tr>
+                            <td class="text text-center" colspan="4">{{ $lanes->links() }}</td>
+                        </tr>
+                        </tfoot>
+                    @endif
                 </table>
             </div>
         </div>

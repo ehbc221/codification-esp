@@ -23,43 +23,53 @@
                     <thead class="bg-info-light">
                     <tr>
                         <th class="col-md-1">Id</th>
-                        <th class="col-md-4">Nom</th>
+                        <th class="col-md-4">Numéro</th>
                         <th class="col-md-4">Couloir</th>
                         <th class="col-md-3">Actions</th>
                     </tr>
                     </thead>
-                    <tbody>
-                    @foreach($rooms as $room)
-                        <tr>
-                            <td>{{ $room->id }}</td>
-                            <td>
-                                <div class="col-md-2"><span class="badge bg-gray-light">{{ $room->positions_count }} Positions</span></div>
-                                <div class="col-md-10">{{ $room->room_name }}</div>
-                            </td>
-                            <td>{{ $room->lane_name }}</td>
-                            <td class="forms-delete">
-                                {!! Form::open(['route' => ['admin.chambres.destroy', $room->id], 'method' => 'delete', 'class' => 'form-inline']) !!}
-                                {!! Form::token() !!}
-                                {!! Form::hidden('id', $room->id) !!}
-                                <span>
+                    @if($rooms->isEmpty())
+                        <tbody>
+                            <tr>
+                                <td colspan="4">
+                                    <h3 class="text text-center text-danger"><i class="fa fa-info-circle"></i> Aucune chambre à afficher.</h3>
+                                </td>
+                            </tr>
+                        </tbody>
+                    @else
+                        <tbody>
+                        @foreach($rooms as $room)
+                            <tr>
+                                <td>{{ $room->id }}</td>
+                                <td>
+                                    <div class="col-md-2"><span class="badge bg-gray-light">{{ $room->positions_count }} Positions</span></div>
+                                    <div class="col-md-10">{{ $room->room_number }}</div>
+                                </td>
+                                <td>{{ $room->lane_name }}</td>
+                                <td class="forms-delete">
+                                    {!! Form::open(['route' => ['admin.chambres.destroy', $room->id], 'method' => 'delete', 'class' => 'form-inline']) !!}
+                                    {!! Form::token() !!}
+                                    {!! Form::hidden('id', $room->id) !!}
+                                    <span>
                                     <a href="{{ route('admin.chambres.show', ['id' => $room->id]) }}"><span class="btn btn-default" title="Voir"><i class="fa fa-eye"></i> Voir</span></a>
                                 </span>
-                                <span>
+                                    <span>
                                     <a href="{{ route('admin.chambres.edit', ['id' => $room->id]) }}"><span class="btn btn-default" title="Modifier"><i class="fa fa-pencil"></i> Modifier</span></a>
                                 </span>
-                                <span>
+                                    <span>
                                     <span class="btn btn-danger" id="button-delete" title="Supprimer"><i class="fa fa-trash"></i> Supprimer</span>
                                 </span>
-                                {!! Form::close() !!}
-                            </td>
+                                    {!! Form::close() !!}
+                                </td>
+                            </tr>
+                        @endforeach
+                        </tbody>
+                        <tfoot class="bg-gray-lighter">
+                        <tr>
+                            <td class="text text-center" colspan="4">{{ $rooms->links() }}</td>
                         </tr>
-                    @endforeach
-                    </tbody>
-                    <tfoot class="bg-gray-lighter">
-                    <tr>
-                        <td class="text text-center" colspan="6">{{ $rooms->links() }}</td>
-                    </tr>
-                    </tfoot>
+                        </tfoot>
+                    @endif
                 </table>
             </div>
         </div>

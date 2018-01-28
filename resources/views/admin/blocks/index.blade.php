@@ -27,37 +27,47 @@
                         <th class="col-md-3">Actions</th>
                     </tr>
                     </thead>
-                    <tbody>
-                    @foreach($blocks as $block)
+                    @if($blocks->isEmpty())
+                        <tbody>
                         <tr>
-                            <td>{{ $block->id }}</td>
-                            <td>
-                                <div class="col-md-2"><span class="badge bg-gray-light">{{ $block->floors_count }} Étages</span></div>
-                                <div class="col-md-10">{{ $block->name }}</div>
-                            </td>
-                            <td class="forms-delete">
-                                {!! Form::open(['route' => ['admin.batiments.destroy', $block->id], 'method' => 'delete', 'class' => 'form-inline']) !!}
-                                {!! Form::token() !!}
-                                {!! Form::hidden('id', $block->id) !!}
-                                <span>
-                                    <a href="{{ route('admin.batiments.show', ['id' => $block->id]) }}"><span class="btn btn-default" title="Voir"><i class="fa fa-eye"></i> Voir</span></a>
-                                </span>
-                                <span>
-                                    <a href="{{ route('admin.batiments.edit', ['id' => $block->id]) }}"><span class="btn btn-default" title="Modifier"><i class="fa fa-pencil"></i> Modifier</span></a>
-                                </span>
-                                <span>
-                                    <span class="btn btn-danger" id="button-delete" title="Supprimer"><i class="fa fa-trash"></i> Supprimer</span>
-                                </span>
-                                {!! Form::close() !!}
+                            <td colspan="3">
+                                <h3 class="text text-center text-danger"><i class="fa fa-info-circle"></i> Aucun batiment à afficher.</h3>
                             </td>
                         </tr>
-                    @endforeach
-                    </tbody>
-                    <tfoot class="bg-gray-lighter">
-                    <tr>
-                        <td class="text text-center" colspan="6">{{ $blocks->links() }}</td>
-                    </tr>
-                    </tfoot>
+                        </tbody>
+                    @else
+                        <tbody>
+                        @foreach($blocks as $block)
+                            <tr>
+                                <td>{{ $block->id }}</td>
+                                <td>
+                                    <div class="col-md-2"><span class="badge bg-gray-light">{{ $block->floors_count }} Étages</span></div>
+                                    <div class="col-md-10">{{ $block->name }}</div>
+                                </td>
+                                <td class="forms-delete">
+                                    {!! Form::open(['route' => ['admin.batiments.destroy', $block->id], 'method' => 'delete', 'class' => 'form-inline']) !!}
+                                    {!! Form::token() !!}
+                                    {!! Form::hidden('id', $block->id) !!}
+                                    <span>
+                                        <a href="{{ route('admin.batiments.show', ['id' => $block->id]) }}"><span class="btn btn-default" title="Voir"><i class="fa fa-eye"></i> Voir</span></a>
+                                    </span>
+                                    <span>
+                                        <a href="{{ route('admin.batiments.edit', ['id' => $block->id]) }}"><span class="btn btn-default" title="Modifier"><i class="fa fa-pencil"></i> Modifier</span></a>
+                                    </span>
+                                    <span>
+                                        <span class="btn btn-danger" id="button-delete" title="Supprimer"><i class="fa fa-trash"></i> Supprimer</span>
+                                    </span>
+                                    {!! Form::close() !!}
+                                </td>
+                            </tr>
+                        @endforeach
+                        </tbody>
+                        <tfoot class="bg-gray-lighter">
+                        <tr>
+                            <td class="text text-center" colspan="3">{{ $blocks->links() }}</td>
+                        </tr>
+                        </tfoot>
+                    @endif
                 </table>
             </div>
         </div>

@@ -54,7 +54,7 @@ class RoomController extends Controller
     public function store(RoomRequest $request)
     {
         $input = [
-            'name' => $request['name'],
+            'number' => $request['number'],
             'lane_id' => $request['lane_id']
         ];
 
@@ -110,7 +110,7 @@ class RoomController extends Controller
         $room = Room::findOrFail($id);
 
         $input = [
-            'name' => $request['name'],
+            'number' => $request['number'],
             'lane_id' => $request['lane_id']
         ];
 

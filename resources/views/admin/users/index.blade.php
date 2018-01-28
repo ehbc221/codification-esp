@@ -30,37 +30,47 @@
                             <th class="col-md-3">Actions</th>
                         </tr>
                     </thead>
-                    <tbody>
-                    @foreach($users as $user)
+                    @if(!$users->isEmpty())
+                        <tbody>
                         <tr>
-                            <td>{{ $user->user_id }}</td>
-                            <td>{{ $user->user_name }}</td>
-                            <td>{{ $user->user_email }}</td>
-                            <td>{{ ($user->user_confirmed) ? 'Oui' : 'Non' }}</td>
-                            <td>{{ $user->role_display_name }}</td>
-                            <td class="forms-delete">
-                                {!! Form::open(['route' => ['admin.utilisateurs.destroy', $user->user_id], 'method' => 'delete', 'class' => 'form-inline']) !!}
-                                {!! Form::token() !!}
-                                {!! Form::hidden('id', $user->user_id) !!}
-                                <span>
-                                    <a href="{{ route('admin.utilisateurs.show', ['id' => $user->user_id]) }}"><span class="btn btn-default" title="Voir"><i class="fa fa-eye"></i> Voir</span></a>
-                                </span>
-                                <span>
-                                    <a href="{{ route('admin.utilisateurs.edit', ['id' => $user->user_id]) }}"><span class="btn btn-default" title="Modifier"><i class="fa fa-pencil"></i> Modifier</span></a>
-                                </span>
-                                <span>
-                                    <span class="btn btn-danger" id="button-delete" title="Supprimer"><i class="fa fa-trash"></i> Supprimer</span>
-                                </span>
-                                {!! Form::close() !!}
+                            <td colspan="6">
+                                <h3 class="text text-center text-danger"><i class="fa fa-info-circle"></i> Aucun utilisateur à afficher.</h3>
                             </td>
                         </tr>
-                    @endforeach
-                    </tbody>
-                    <tfoot class="bg-gray-lighter">
-                        <tr>
-                            <td class="text text-center" colspan="6">{{ $users->links() }}</td>
-                        </tr>
-                    </tfoot>
+                        </tbody>
+                    @else
+                        <tbody>
+                        @foreach($users as $user)
+                            <tr>
+                                <td>{{ $user->user_id }}</td>
+                                <td>{{ $user->user_name }}</td>
+                                <td>{{ $user->user_email }}</td>
+                                <td>{{ ($user->user_confirmed) ? 'Oui' : 'Non' }}</td>
+                                <td>{{ $user->role_display_name }}</td>
+                                <td class="forms-delete">
+                                    {!! Form::open(['route' => ['admin.utilisateurs.destroy', $user->user_id], 'method' => 'delete', 'class' => 'form-inline']) !!}
+                                    {!! Form::token() !!}
+                                    {!! Form::hidden('id', $user->user_id) !!}
+                                    <span>
+                                        <a href="{{ route('admin.utilisateurs.show', ['id' => $user->user_id]) }}"><span class="btn btn-default" title="Voir"><i class="fa fa-eye"></i> Voir</span></a>
+                                    </span>
+                                    <span>
+                                        <a href="{{ route('admin.utilisateurs.edit', ['id' => $user->user_id]) }}"><span class="btn btn-default" title="Modifier"><i class="fa fa-pencil"></i> Modifier</span></a>
+                                    </span>
+                                    <span>
+                                        <span class="btn btn-danger" id="button-delete" title="Supprimer"><i class="fa fa-trash"></i> Supprimer</span>
+                                    </span>
+                                    {!! Form::close() !!}
+                                </td>
+                            </tr>
+                        @endforeach
+                        </tbody>
+                        <tfoot class="bg-gray-lighter">
+                            <tr>
+                                <td class="text text-center" colspan="6">{{ $users->links() }}</td>
+                            </tr>
+                        </tfoot>
+                    @endif
                 </table>
             </div>
         </div>

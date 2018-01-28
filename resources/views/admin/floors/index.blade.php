@@ -28,38 +28,48 @@
                         <th class="col-md-3">Actions</th>
                     </tr>
                     </thead>
-                    <tbody>
-                    @foreach($floors as $floor)
+                    @if($floors->isEmpty())
+                        <tbody>
                         <tr>
-                            <td>{{ $floor->id }}</td>
-                            <td>
-                                <div class="col-md-2"><span class="badge bg-gray-light">{{ $floor->lanes_count }} Couloirs</span></div>
-                                <div class="col-md-10">{{ $floor->floor_number }}</div>
-                            </td>
-                            <td>{{ $floor->block_name }}</td>
-                            <td class="forms-delete">
-                                {!! Form::open(['route' => ['admin.etages.destroy', $floor->id], 'method' => 'delete', 'class' => 'form-inline']) !!}
-                                {!! Form::token() !!}
-                                {!! Form::hidden('id', $floor->id) !!}
-                                <span>
-                                    <a href="{{ route('admin.etages.show', ['id' => $floor->id]) }}"><span class="btn btn-default" title="Voir"><i class="fa fa-eye"></i> Voir</span></a>
-                                </span>
-                                <span>
-                                    <a href="{{ route('admin.etages.edit', ['id' => $floor->id]) }}"><span class="btn btn-default" title="Modifier"><i class="fa fa-pencil"></i> Modifier</span></a>
-                                </span>
-                                <span>
-                                    <span class="btn btn-danger" id="button-delete" title="Supprimer"><i class="fa fa-trash"></i> Supprimer</span>
-                                </span>
-                                {!! Form::close() !!}
+                            <td colspan="4">
+                                <h3 class="text text-center text-danger"><i class="fa fa-info-circle"></i> Aucun étage à afficher.</h3>
                             </td>
                         </tr>
-                    @endforeach
-                    </tbody>
-                    <tfoot class="bg-gray-lighter">
-                    <tr>
-                        <td class="text text-center" colspan="6">{{ $floors->links() }}</td>
-                    </tr>
-                    </tfoot>
+                        </tbody>
+                    @else
+                        <tbody>
+                        @foreach($floors as $floor)
+                            <tr>
+                                <td>{{ $floor->id }}</td>
+                                <td>
+                                    <div class="col-md-2"><span class="badge bg-gray-light">{{ $floor->lanes_count }} Couloirs</span></div>
+                                    <div class="col-md-10">{{ $floor->floor_number }}</div>
+                                </td>
+                                <td>{{ $floor->block_name }}</td>
+                                <td class="forms-delete">
+                                    {!! Form::open(['route' => ['admin.etages.destroy', $floor->id], 'method' => 'delete', 'class' => 'form-inline']) !!}
+                                    {!! Form::token() !!}
+                                    {!! Form::hidden('id', $floor->id) !!}
+                                    <span>
+                                        <a href="{{ route('admin.etages.show', ['id' => $floor->id]) }}"><span class="btn btn-default" title="Voir"><i class="fa fa-eye"></i> Voir</span></a>
+                                    </span>
+                                    <span>
+                                        <a href="{{ route('admin.etages.edit', ['id' => $floor->id]) }}"><span class="btn btn-default" title="Modifier"><i class="fa fa-pencil"></i> Modifier</span></a>
+                                    </span>
+                                    <span>
+                                        <span class="btn btn-danger" id="button-delete" title="Supprimer"><i class="fa fa-trash"></i> Supprimer</span>
+                                    </span>
+                                    {!! Form::close() !!}
+                                </td>
+                            </tr>
+                        @endforeach
+                        </tbody>
+                        <tfoot class="bg-gray-lighter">
+                        <tr>
+                            <td class="text text-center" colspan="4">{{ $floors->links() }}</td>
+                        </tr>
+                        </tfoot>
+                    @endif
                 </table>
             </div>
         </div>

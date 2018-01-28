@@ -16,14 +16,14 @@
                 <div class="panel-body">
                     <div class="row">
                         <div class="col-md-8 col-md-offset-2 col-sm-12">
-                            <div class="form-group  {{ $errors->has('name') ? ' has-error' : '' }}">
-                                {!!  Form::label('name', 'Nom <em class="text text-danger">*</em>', ['class' => 'col-md-2 col-sm-2 control-label'], false) !!}
+                            <div class="form-group  {{ $errors->has('number') ? ' has-error' : '' }}">
+                                {!!  Form::label('number', 'Numéro <em class="text text-danger">*</em>', ['class' => 'col-md-2 col-sm-2 control-label'], false) !!}
                                 <div class="col-md-6 col-sm-10">
-                                    {!! Form::text('name', null, ['class' => 'form-control', 'id' => 'name', 'value' => old('name'), 'required' => 'required', 'autofocus' => 'on']) !!}
+                                    {!! Form::number('number', null, ['class' => 'form-control', 'id' => 'number', 'value' => old('number'), 'required' => 'required', 'autofocus' => 'on']) !!}
 
-                                    @if ($errors->has('name'))
+                                    @if ($errors->has('number'))
                                         <div class="help-block">
-                                            @foreach($errors->get('name') as $message)
+                                            @foreach($errors->get('number') as $message)
                                                 <strong>{{ $message }}</strong>
                                             @endforeach
                                         </div>

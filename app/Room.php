@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Room extends Model
 {
     protected $fillable = [
-        'name', 'lane_id'
+        'number', 'lane_id'
     ];
 
     public function lane()
@@ -40,7 +40,7 @@ class Room extends Model
         return Room::join('lanes', 'rooms.lane_id', 'lanes.id')
             ->join('floors', 'lanes.floor_id', 'floors.id')
             ->join('blocks', 'floors.block_id', 'blocks.id')
-            ->select('rooms.id', 'rooms.name as room_name', 'lanes.name as lane_name', 'floors.number as floor_number', 'blocks.name as block_name')
+            ->select('rooms.id', 'rooms.number as room_number', 'lanes.name as lane_name', 'floors.number as floor_number', 'blocks.name as block_name')
             ->where('rooms.id', $id)
             ->first();
     }
@@ -50,11 +50,11 @@ class Room extends Model
         return Room::join('lanes', 'rooms.lane_id', 'lanes.id')
             ->join('floors', 'lanes.floor_id', 'floors.id')
             ->join('blocks', 'floors.block_id', 'blocks.id')
-            ->select('rooms.id', 'rooms.name as room_name', 'lanes.name as lane_name', 'floors.number as floor_number', 'blocks.name as block_name')
+            ->select('rooms.id', 'rooms.number as room_number', 'lanes.name as lane_name', 'floors.number as floor_number', 'blocks.name as block_name')
             ->OrderBy('blocks.name', 'ASC')
             ->OrderBy('floors.number', 'ASC')
             ->OrderBy('lanes.name', 'ASC')
-            ->OrderBy('rooms.name', 'ASC')
+            ->OrderBy('rooms.number', 'ASC')
             ->get();
     }
 
@@ -63,11 +63,11 @@ class Room extends Model
         return Room::join('lanes', 'rooms.lane_id', 'lanes.id')
             ->join('floors', 'lanes.floor_id', 'floors.id')
             ->join('blocks', 'floors.block_id', 'blocks.id')
-            ->select('rooms.id', 'rooms.name as room_name', 'lanes.name as lane_name', 'floors.number as floor_number', 'blocks.name as block_name')
+            ->select('rooms.id', 'rooms.number as room_number', 'lanes.name as lane_name', 'floors.number as floor_number', 'blocks.name as block_name')
             ->OrderBy('blocks.name', 'ASC')
             ->OrderBy('floors.number', 'ASC')
             ->OrderBy('lanes.name', 'ASC')
-            ->orDerBy('rooms.name', 'DESC')
+            ->orDerBy('rooms.number', 'DESC')
             ->withCount('positions')
             ->paginate($limit);
     }
