@@ -29,6 +29,14 @@ class Grade extends Model
             ->first();
     }
 
+    public static function getGradesOptionList()
+    {
+        return Grade::join('formations', 'grades.formation_id', 'formations.id')
+            ->select('grades.id', 'grades.number as grade_number', 'formations.name as formation_name')
+            ->OrderBy('name', 'ASC')
+            ->get();
+    }
+
     public static function getGradesShortList($limit = 15)
     {
         return Grade::join('formations', 'grades.formation_id', 'formations.id')
@@ -40,4 +48,12 @@ class Grade extends Model
             ->paginate($limit);
     }
 
+    public static function getGradesOptionListToArray()
+    {
+        $grades = Grade::getGradesOptionList();
+        $grades = $grades->mapWithKeys(function ($item) {
+            return [$item['id'] => $item['grade_number'] . ' (' . $item['formation_name'] . ')'];
+        })->toArray();
+        return $grades;
+    }
 }

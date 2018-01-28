@@ -3,6 +3,9 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Validation\Rule;
 
 class PositionRequest extends FormRequest
 {
@@ -19,12 +22,45 @@ class PositionRequest extends FormRequest
     /**
      * Get the validation rules that apply to the request.
      *
+     * @param Request $request
      * @return array
      */
-    public function rules()
+    public function rules(Request $request)
     {
-        return [
-            //
-        ];
+        switch($this->method()) {
+            case 'GET':
+            case 'DELETE':
+                {
+                    return [];
+                }
+            case 'POST':
+                {
+                    return [
+                        'number' => [
+                            'required',
+                            Rule::unique('positions')->where(function ($query) use($request) {
+                                return $query->where('room_id', $request->input('room_id'));
+                            }),
+                        ],
+                        'room_id' => 'required|exists:rooms,id'
+                    ];
+                }
+            case 'PUT':
+            case 'PATCH':
+                {
+                    return [
+                        'number' => [
+                            'required',
+                            Rule::unique('positions')->where(function ($query) use($request) {
+                                return $query->where('room_id', $request->input('room_id'));
+                            }),
+                        ],
+                        'room_id' => 'required|exists:rooms,id'
+                    ];
+                }
+            default:
+                break;
+        }
+        return [];
     }
 }

@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Requests\RoomRequest;
 use App\Lane;
 use App\Room;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\View;
 
@@ -25,7 +24,7 @@ class RoomController extends Controller
     {
         $rooms = Room::getRoomsShortList();
         foreach ($rooms as $room) {
-            $room['lane_name'] = $room['lane_name'] . ' (' . $room['floor_number'] . ' - ' . $room['block_name'] . ')';
+            $room['lane_name'] = $room['lane_name'] . ' (' . $room['block_name'] . ' - ' . $room['floor_number'] . ')';
         }
 
         $action_name = 'Liste';
@@ -61,7 +60,7 @@ class RoomController extends Controller
         $room = Room::create($input);
 
         return redirect()->route('admin.chambres.show', ['id' => $room->id])
-            ->with('success', 'Chmabre ajoutée avec succès.');
+            ->with('success', 'Chambre ajoutée avec succès.');
     }
 
     /**
@@ -73,7 +72,7 @@ class RoomController extends Controller
     public function show($id)
     {
         $room = Room::getRoom($id);
-        $room['lane_name'] = $room['lane_name'] . ' (' . $room['block_name'] . ' - ' . $room['floor_number'] . ')';
+        $room['lane_name'] = $room['lane_name'] . ' (' . $room['floor_number'] . ' - ' . $room['block_name'] . ')';
 
         $success = (session('success')) ? session('success') : null;
 
@@ -117,7 +116,7 @@ class RoomController extends Controller
         $room->update($input);
 
         return redirect()->route('admin.chambres.show', ['id' => $room->id])
-            ->with('success', 'Chmabre modifiée avec succès.');
+            ->with('success', 'Chambre modifiée avec succès.');
     }
 
     /**
@@ -133,7 +132,7 @@ class RoomController extends Controller
         $room->delete();
 
         return redirect()->route('admin.chambres.index')
-            ->with('success', 'Chmabre supprimée avec succès.');
+            ->with('success', 'Chambre supprimée avec succès.');
     }
 
 }
