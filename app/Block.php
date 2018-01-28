@@ -35,4 +35,13 @@ class Block extends Model
             ->paginate($limit);
     }
 
+    public static function getBlocksOptionListToArray()
+    {
+        $blocks = Block::getBlocksOptionList();
+        $blocks = $blocks->mapWithKeys(function ($item) {
+            return [$item['id'] => $item['name']];
+        })->toArray();
+        return $blocks;
+    }
+
 }

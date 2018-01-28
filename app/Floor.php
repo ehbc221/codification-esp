@@ -30,7 +30,8 @@ class Floor extends Model
 
     public static function getFloorsOptionList()
     {
-        return Block::select('id', 'name')
+        return Floor::join('blocks', 'floors.block_id', 'blocks.id')
+            ->select('floors.id', 'floors.number as floor_number', 'blocks.name as block_name')
             ->OrderBy('name', 'ASC')
             ->get();
     }
@@ -45,4 +46,12 @@ class Floor extends Model
             ->paginate($limit);
     }
 
+    public static function getFloorsOptionListToArray()
+    {
+        $floors = Floor::getFloorsOptionList();
+        $floors = $floors->mapWithKeys(function ($item) {
+            return [$item['id'] => $item['floor_number'] . ' (' . $item['block_name'] . ')'];
+        })->toArray();
+        return $floors;
+    }
 }

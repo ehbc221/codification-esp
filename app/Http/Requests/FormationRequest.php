@@ -25,8 +25,6 @@ class FormationRequest extends FormRequest
      */
     public function rules()
     {
-        $formation = Formation::find($this->formation);
-
         switch($this->method()) {
             case 'GET':
             case 'DELETE':

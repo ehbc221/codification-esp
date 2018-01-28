@@ -52,4 +52,13 @@ class Formation extends Model
             ->paginate($limit);
     }
 
+    public static function getFormationsOptionListToArray()
+    {
+        $formations = Formation::getFormationsOptionList();
+        $formations = $formations->mapWithKeys(function ($item) {
+            return [$item['id'] => $item['name'] = $item['formation_name'] . ' (' . $item['department_name'] . ')'];
+        })->toArray();
+        return $formations;
+    }
+
 }

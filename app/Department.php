@@ -35,4 +35,13 @@ class Department extends Model
             ->paginate($limit);
     }
 
+    public static function getDepartmentsOptionListToArray()
+    {
+        $departments = Department::getDepartmentsOptionList();
+        $departments = $departments->mapWithKeys(function ($item) {
+            return [$item['id'] => $item['name']];
+        })->toArray();
+        return $departments;
+    }
+
 }

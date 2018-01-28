@@ -25,8 +25,6 @@ class FloorRequest extends FormRequest
      */
     public function rules()
     {
-        $floor = Floor::find($this->floor);
-
         switch($this->method()) {
             case 'GET':
             case 'DELETE':

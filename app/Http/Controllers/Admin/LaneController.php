@@ -2,11 +2,19 @@
 
 namespace App\Http\Controllers\Admin;
 
-use Illuminate\Http\Request;
+use App\Floor;
+use App\Http\Requests\LaneRequest;
+use App\Lane;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\View;
 
 class LaneController extends Controller
 {
+    public function __construct()
+    {
+        View::share('controller_name', 'Couloirs');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -14,7 +22,13 @@ class LaneController extends Controller
      */
     public function index()
     {
-        //
+        $lanes = Lane::getLanesShortList();
+        foreach ($lanes as $lane) {
+            $lane['floor_number'] = $lane['floor_number'] . ' (' . $lane['block_name'] . ')';
+        }
+
+        $action_name = 'Liste';
+        return view('admin.lanes.index', compact(['action_name', 'lanes']));
     }
 
     /**
@@ -24,18 +38,29 @@ class LaneController extends Controller
      */
     public function create()
     {
-        //
+        $floors = Floor::getFloorsOptionListToArray();
+
+        $action_name = 'Ajouter';
+        return view('admin.lanes.create', compact(['action_name', 'floors']));
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param LaneRequest $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(LaneRequest $request)
     {
-        //
+        $input = [
+            'name' => $request['name'],
+            'floor_id' => $request['floor_id']
+        ];
+
+        $lane = Lane::create($input);
+
+        return redirect()->route('admin.couloirs.show', ['id' => $lane->id])
+            ->with('success', 'Couloir ajouté avec succès.');
     }
 
     /**
@@ -46,7 +71,14 @@ class LaneController extends Controller
      */
     public function show($id)
     {
-        //
+        $lane = Lane::getLane($id);
+        $lane['floor_number'] = $lane['floor_number'] . ' (' . $lane['block_name'] . ')';
+
+        $success = (session('success')) ? session('success') : null;
+
+        $action_name = "Voir";
+        return view('admin.lanes.show', compact(['action_name', 'lane']))
+            ->with('success', $success);
     }
 
     /**
@@ -57,19 +89,34 @@ class LaneController extends Controller
      */
     public function edit($id)
     {
-        //
+        $lane = Lane::findOrFail($id);
+
+        $floors = Floor::getFloorsOptionListToArray();
+
+        $action_name = 'Modifier';
+        return view('admin.lanes.edit', compact(['action_name', 'lane', 'floors']));
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param LaneRequest $request
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(LaneRequest $request, $id)
     {
-        //
+        $lane = Lane::findOrFail($id);
+
+        $input = [
+            'name' => $request['name'],
+            'floor_id' => $request['floor_id']
+        ];
+
+        $lane->update($input);
+
+        return redirect()->route('admin.couloirs.show', ['id' => $lane->id])
+            ->with('success', 'Couloir modifié avec succès.');
     }
 
     /**
@@ -80,6 +127,12 @@ class LaneController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $lane = Lane::findOrFail($id);
+
+        $lane->delete();
+
+        return redirect()->route('admin.couloirs.index')
+            ->with('success', 'Couloir supprimé avec succès.');
     }
+
 }

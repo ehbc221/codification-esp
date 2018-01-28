@@ -33,7 +33,7 @@
                             <div class="form-group  {{ $errors->has('block_id') ? ' has-error' : '' }}">
                                 {!!  Form::label('block_id', 'Batiment <em class="text text-danger">*</em>', ['class' => 'col-md-2 col-sm-2 control-label'], false) !!}
                                 <div class="col-md-6 col-sm-10">
-                                    {!! Form::select('block_id', $blocks, old('block_id'), ['class' => 'form-control', 'id' => 'block_id', 'placeholder' => 'Sélectionnez une étage...', 'required' => 'required']) !!}
+                                    {!! Form::select('block_id', $blocks, old('block_id'), ['class' => 'form-control', 'id' => 'block_id', 'placeholder' => 'Sélectionnez une batiment...', 'required' => 'required']) !!}
 
                                     @if ($errors->has('block_id'))
                                         <div class="help-block">

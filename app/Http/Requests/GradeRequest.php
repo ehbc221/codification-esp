@@ -4,6 +4,7 @@ namespace App\Http\Requests;
 
 use App\Grade;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class GradeRequest extends FormRequest
@@ -25,8 +26,6 @@ class GradeRequest extends FormRequest
      */
     public function rules()
     {
-        $grade = Grade::find($this->grade);
-
         switch($this->method()) {
             case 'GET':
             case 'DELETE':
@@ -36,7 +35,7 @@ class GradeRequest extends FormRequest
             case 'POST':
                 {
                     return [
-                        'number' => 'required|integer|unique:grades,id,NULL,id,formation_id,'.$grade->id,
+                        'number' => 'required',
                         'formation_id' => 'required|exists:formations,id'
                     ];
                 }
@@ -44,7 +43,7 @@ class GradeRequest extends FormRequest
             case 'PATCH':
                 {
                     return [
-                        'number' => 'required|integer|unique:grades,id,NULL,id,formation_id,'.$grade->id,
+                        'number' => 'required',
                         'formation_id' => 'required|exists:formations,id'
                     ];
                 }

@@ -35,10 +35,7 @@ class FormationController extends Controller
      */
     public function create()
     {
-        $departments = Department::getDepartmentsOptionList();
-        $departments = $departments->mapWithKeys(function ($item) {
-            return [$item['id'] => $item['name']];
-        })->toArray();
+        $departments = Department::getDepartmentsOptionListToArray();
 
         $action_name = 'Ajouter';
         return view('admin.formations.create', compact(['action_name', 'departments']));
@@ -90,10 +87,7 @@ class FormationController extends Controller
     {
         $formation = Formation::findOrFail($id);
 
-        $departments = Department::getDepartmentsOptionList();
-        $departments = $departments->mapWithKeys(function ($item) {
-            return [$item['id'] => $item['name']];
-        })->toArray();
+        $departments = Department::getDepartmentsOptionListToArray();
 
         $action_name = 'Modifier';
         return view('admin.formations.edit', compact(['action_name', 'formation', 'departments']));

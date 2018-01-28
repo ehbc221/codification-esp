@@ -35,7 +35,7 @@ class FloorController extends Controller
      */
     public function create()
     {
-        $blocks = $this->getBlocksOptionListToArray();
+        $blocks = Block::getBlocksOptionListToArray();
 
         $action_name = 'Ajouter';
         return view('admin.floors.create', compact(['action_name', 'blocks']));
@@ -87,7 +87,7 @@ class FloorController extends Controller
     {
         $floor = Floor::findOrFail($id);
 
-        $blocks = $this->getBlocksOptionListToArray();
+        $blocks = Block::getBlocksOptionListToArray();
 
         $action_name = 'Modifier';
         return view('admin.floors.edit', compact(['action_name', 'floor', 'blocks']));
@@ -129,15 +129,6 @@ class FloorController extends Controller
 
         return redirect()->route('admin.etages.index')
             ->with('success', 'Étage supprimé avec succès.');
-    }
-
-    private function getBlocksOptionListToArray()
-    {
-        $blocks = Block::getBlocksOptionList();
-        $blocks = $blocks->mapWithKeys(function ($item) {
-            return [$item['id'] => $item['name']];
-        })->toArray();
-        return $blocks;
     }
 
 }

@@ -38,7 +38,7 @@ class GradeController extends Controller
      */
     public function create()
     {
-        $formations = $this->getFormationsOptionListToArray();
+        $formations = Formation::getFormationsOptionListToArray();
 
         $action_name = 'Ajouter';
         return view('admin.grades.create', compact(['action_name', 'formations']));
@@ -91,7 +91,7 @@ class GradeController extends Controller
     {
         $grade = Grade::findOrFail($id);
 
-        $formations = $this->getFormationsOptionListToArray();
+        $formations = Formation::getFormationsOptionListToArray();
 
         $action_name = 'Modifier';
         return view('admin.grades.edit', compact(['action_name', 'grade', 'formations']));
@@ -133,15 +133,6 @@ class GradeController extends Controller
 
         return redirect()->route('admin.niveaux.index')
             ->with('success', 'Niveau supprimé avec succès.');
-    }
-
-    private function getFormationsOptionListToArray()
-    {
-        $formations = Formation::getFormationsOptionList();
-        $formations = $formations->mapWithKeys(function ($item) {
-            return [$item['id'] => $item['name'] = $item['formation_name'] . ' - ' . $item['department_name']];
-        })->toArray();
-        return $formations;
     }
 
 }
