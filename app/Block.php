@@ -15,11 +15,6 @@ class Block extends Model
         return $this->hasMany('App\Floor');
     }
 
-    public function concierges_block()
-    {
-        return $this->hasMany('App\ConciergeBlock');
-    }
-
     public static function getBlocksOptionList()
     {
         return Block::select('id', 'name')

@@ -34,11 +34,6 @@ class User extends Authenticatable
         return $this->hasOne('App\Student');
     }
 
-    public function concierges_block()
-    {
-        return $this->hasOne('App\ConciergesBlock');
-    }
-
     public function codifications()
     {
         return $this->hasMany('App\Codification');
