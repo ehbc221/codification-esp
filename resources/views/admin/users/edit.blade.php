@@ -16,6 +16,7 @@
 
                         {!! Form::model($user, ['route' => ['admin.utilisateurs.update', $user->id], 'method' => 'put', 'class' => 'form-horizontal']) !!}
                         {!! Form::token() !!}
+                        {!! Form::hidden('id', $user->id) !!}
 
                         <div class="col-md-8 col-md-offset-2 col-sm-12">
                             <div class="form-group  {{ $errors->has('name') ? ' has-error' : '' }}">

@@ -64,6 +64,14 @@ class User extends Authenticatable
             ->first();
     }
 
+    public static function getUser($id)
+    {
+        return User::join('role_user', 'users.id', 'role_user.user_id')
+            ->join('roles', 'role_user.role_id', 'roles.id')
+            ->select('users.id', 'users.name', 'users.email', 'users.phone', 'users.cin', 'users.matriculation', 'roles.display_name as role_display_name')
+            ->first();
+    }
+
     public static function getList(array $select = null, array $where = null, string $orderBy = null, string $orderType = null, int $limit = 15)
     {
         $fields = ['id', 'name', 'email', 'phone', 'cin', 'matriculation', 'confirmation_code', 'confirmed'];

@@ -36,8 +36,13 @@ class UserController extends Controller
      */
     public function create()
     {
+        $roles = [
+            'admin' => 'Administrateur',
+            'student' => 'Étudiant'
+        ];
+
         $action_name = 'Ajouter';
-        return view('admin.users.create', compact(['action_name']));
+        return view('admin.users.create', compact(['action_name', 'roles']));
     }
 
     /**
@@ -54,14 +59,15 @@ class UserController extends Controller
             'password' => bcrypt($request['password']),
             'phone' => $request['phone'],
             'cin' => $request['cin'],
-            'matriculation' => $request['matriculation'],
-            'confirmation_code' => Uuid::uuid4()
+            'matriculation' => $request['matriculation']
         ];
 
         $user = User::create($input);
 
+        $role_admin = Role::getRole('admin');
         $role_student = Role::getRole('student');
-        $user->attachRole($role_student);
+
+        ($request['role'] === 'admin') ? $user->attachRole($role_admin) : $user->attachRole($role_student);
 
         return redirect()->route('admin.utilisateurs.show', ['id' => $user->id])
             ->with('success', 'Utilisateur ajouté avec succès.');
@@ -75,7 +81,7 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        $user = User::findOrFail($id);
+        $user = User::getUser($id);
 
         $success = (session('success')) ? session('success') : null;
 
@@ -94,8 +100,13 @@ class UserController extends Controller
     {
         $user = User::findOrFail($id);
 
+        $roles = [
+            'admin' => 'Administrateur',
+            'student' => 'Étudiant'
+        ];
+
         $action_name = 'Modifier';
-        return view('admin.users.edit', compact(['action_name', 'user']));
+        return view('admin.users.edit', compact(['action_name', 'user', 'roles']));
     }
 
     /**
@@ -116,7 +127,7 @@ class UserController extends Controller
             'cin' => $request['cin'],
             'matriculation' => $request['matriculation']
         ];
-        if (!empty($request['password'])) $input['password'] = bcrypt($request['password']);
+        if (isset($request['password']) && !empty($request['password'])) $input['password'] = bcrypt($request['password']);
 
         $user->update($input);
 

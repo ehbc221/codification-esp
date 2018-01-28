@@ -45,6 +45,12 @@
                                         <div class="form-control">{{ $user->matriculation }}</div>
                                     </div>
                                 </div>
+                                <div class="form-group">
+                                    <label class="col-md-2 col-sm-2 control-label">Role</label>
+                                    <div class="col-md-6 col-sm-10">
+                                        <div class="form-control">{{ $user->role_display_name }}</div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </form>

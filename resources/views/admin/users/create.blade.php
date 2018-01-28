@@ -111,6 +111,22 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="col-md-8 col-md-offset-2 col-sm-12">
+                            <div class="form-group  {{ $errors->has('role') ? ' has-error' : '' }}">
+                                {!!  Form::label('role', 'Role <em class="text text-danger">*</em>', ['class' => 'col-md-2 col-sm-2 control-label'], false) !!}
+                                <div class="col-md-6 col-sm-10">
+                                    {!! Form::select('role', $roles, old('role'), ['class' => 'form-control', 'id' => 'role', 'placeholder' => 'Sélectionnez un role...', 'required' => 'required']) !!}
+
+                                    @if ($errors->has('role'))
+                                        <div class="help-block">
+                                            @foreach($errors->get('role') as $message)
+                                                <strong>{{ $message }}</strong>
+                                            @endforeach
+                                        </div>
+                                    @endif
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div class="panel-footer text-center">

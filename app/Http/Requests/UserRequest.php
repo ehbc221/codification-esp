@@ -4,6 +4,7 @@ namespace App\Http\Requests;
 
 use App\User;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rule;
 
@@ -22,11 +23,12 @@ class UserRequest extends FormRequest
     /**
      * Get the validation rules that apply to the request.
      *
+     * @param Request $request
      * @return array
      */
-    public function rules()
+    public function rules(Request $request)
     {
-        $user = User::find($this->user);
+        $roles = ['admin', 'student'];
 
         switch($this->method()) {
             case 'GET':
@@ -40,9 +42,12 @@ class UserRequest extends FormRequest
                         'name' => 'required|min:6|max:255',
                         'email' => 'required|email|unique:users',
                         'password' => 'required|min:8',
-                        'phone' => 'required|min:9',
+                        'phone' => 'required|unique:users|min:9',
                         'cin' => 'required|unique:users',
-                        'matriculation' => 'required|unique:users'
+                        'matriculation' => 'required|unique:users',
+                        'role' => [
+                            Rule::in($roles)
+                        ]
                     ];
                 }
             case 'PUT':
@@ -53,22 +58,22 @@ class UserRequest extends FormRequest
                         'email' => [
                             'required',
                             'email',
-                            Rule::unique('users')->ignore($user->id)
+                            Rule::unique('users')->ignore($request->input('id'))
                         ],
                         'password' => 'nullable|min:8|confirmed',
                         'password_confirmation' => 'required_with_all:password|same:password',
                         'phone' => [
                             'required',
                             'min:9',
-                            Rule::unique('users')->ignore($user->id)
+                            Rule::unique('users')->ignore($request->input('id'))
                         ],
                         'cin' => [
                             'required',
-                            Rule::unique('users')->ignore($user->id)
+                            Rule::unique('users')->ignore($request->input('id'))
                         ],
                         'matriculation' => [
                             'required',
-                            Rule::unique('users')->ignore($user->id)
+                            Rule::unique('users')->ignore($request->input('id'))
                         ],
                     ];
                 }

@@ -30,7 +30,7 @@
                             <th class="col-md-3">Actions</th>
                         </tr>
                     </thead>
-                    @if(!$users->isEmpty())
+                    @if($users->isEmpty())
                         <tbody>
                         <tr>
                             <td colspan="6">
