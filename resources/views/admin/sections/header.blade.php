@@ -5,10 +5,10 @@
         <div class="navbar-header">
             <a href="#/" class="navbar-brand">
                 <div class="brand-logo">
-                    <img src="{{ asset('angle/app/img/logo.png') }}" alt="App Logo" class="img-responsive">
+                    <img src="{{ asset('img/codification-esp.png') }}" alt="App Logo" class="img-responsive">
                 </div>
                 <div class="brand-logo-collapsed">
-                    <img src="{{ asset('angle/app/img/logo-single.png') }}" alt="App Logo" class="img-responsive">
+                    <img src="{{ asset('img/codification-esp-small.png') }}" alt="App Logo" class="img-responsive">
                 </div>
             </a>
         </div>
