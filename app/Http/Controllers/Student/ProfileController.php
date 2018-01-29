@@ -9,6 +9,7 @@ use App\Student;
 use App\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\View;
+use Jenssegers\Date\Date;
 
 class ProfileController extends Controller
 {
@@ -68,7 +69,7 @@ class ProfileController extends Controller
 
         // Save Student
         $input = [
-            'date_of_birth' => $request['date_of_birth'],
+            'date_of_birth' => new Date($request['date_of_birth']),
             'place_of_birth' => $request['place_of_birth'],
             'sex' => $request['sex'],
             'grade_id' => $request['grade_id'],

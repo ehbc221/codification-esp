@@ -260,8 +260,17 @@
 @endsection
 
 @push('scripts')
+    <!-- DATEPICKER-->
+    <link rel="stylesheet" href="{{ asset('angle/vendor/jquery-ui/themes/smoothness/jquery-ui.css') }}">
+    <script src="{{ asset('angle/vendor/jquery-ui/ui/datepicker.js') }}"></script>
     <script type="text/javascript">
         $(document).ready(function () {
+            /*
+                DATEPICKERS
+            */
+            $(function() {
+                $("#date_of_birth").datepicker();
+            });
             /*
                 HANDLE ALERTS (SUCCESS + ERROR)
              */
