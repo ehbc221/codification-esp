@@ -20,11 +20,6 @@ class Formation extends Model
         return $this->hasMany('App\Grade');
     }
 
-    public function students()
-    {
-        return $this->hasMany('App\Student');
-    }
-
     public static function getFormation($id)
     {
         return Formation::join('departments', 'formations.department_id', 'departments.id')

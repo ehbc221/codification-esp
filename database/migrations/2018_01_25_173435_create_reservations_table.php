@@ -17,14 +17,12 @@ class CreateReservationsTable extends Migration
             $table->increments('id');
             $table->integer('codification_periode_id')->unsigned();
             $table->integer('student_id')->unsigned()->nullable();
-            $table->integer('room_id')->unsigned();
             $table->integer('position_id')->unsigned();
             $table->boolean('is_validated')->default(false);
             $table->timestamps();
 
             $table->foreign('codification_periode_id')->references('id')->on('codification_periodes')->onDelete('cascade');
             $table->foreign('student_id')->references('id')->on('students')->onDelete('cascade');
-            $table->foreign('room_id')->references('id')->on('rooms')->onDelete('cascade');
             $table->foreign('position_id')->references('id')->on('positions')->onDelete('cascade');
 
             $table->unique(['codification_periode_id', 'student_id']);

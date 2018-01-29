@@ -15,11 +15,6 @@ class Department extends Model
         return $this->hasMany('App\Formation');
     }
 
-    public function students()
-    {
-        return $this->hasMany('App\Student');
-    }
-
     public static function getDepartmentsOptionList()
     {
         return Department::select('id', 'name')

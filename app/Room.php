@@ -25,16 +25,6 @@ class Room extends Model
         return $this->hasMany('App\Codification');
     }
 
-    public function reservations()
-    {
-        return $this->hasMany('App\Reservation');
-    }
-
-    public function exchanges()
-    {
-        return $this->hasMany('App\Exchange');
-    }
-
     public static function getRoom($id)
     {
         return Room::join('lanes', 'rooms.lane_id', 'lanes.id')

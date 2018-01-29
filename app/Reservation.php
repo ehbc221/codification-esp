@@ -20,11 +20,6 @@ class Reservation extends Model
         return $this->belongsTo('App\Student');
     }
 
-    public function room()
-    {
-        return $this->belongsTo('App\Room');
-    }
-
     public function position()
     {
         return $this->belongsTo('App\Position');

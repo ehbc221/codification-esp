@@ -22,19 +22,27 @@ class PositionsTableSeeder extends Seeder
                 $positions = [
                     [
                         'number' => 1,
-                        'room_id' => $room->room_id
+                        'room_id' => $room->room_id,
+                        'created_at' => now(),
+                        'updated_at' => now()
                     ],
                     [
                         'number' => 2,
-                        'room_id' => $room->room_id
+                        'room_id' => $room->room_id,
+                        'created_at' => now(),
+                        'updated_at' => now()
                     ],
                     [
                         'number' => 3,
-                        'room_id' => $room->room_id
+                        'room_id' => $room->room_id,
+                        'created_at' => now(),
+                        'updated_at' => now()
                     ],
                     [
                         'number' => 4,
-                        'room_id' => $room->room_id
+                        'room_id' => $room->room_id,
+                        'created_at' => now(),
+                        'updated_at' => now()
                     ]
                 ];
                 DB::table('positions')->insert($positions);
@@ -43,15 +51,21 @@ class PositionsTableSeeder extends Seeder
                 $positions = [
                     [
                         'number' => 1,
-                        'room_id' => $room->room_id
+                        'room_id' => $room->room_id,
+                        'created_at' => now(),
+                        'updated_at' => now()
                     ],
                     [
                         'number' => 2,
-                        'room_id' => $room->room_id
+                        'room_id' => $room->room_id,
+                        'created_at' => now(),
+                        'updated_at' => now()
                     ],
                     [
                         'number' => 3,
-                        'room_id' => $room->room_id
+                        'room_id' => $room->room_id,
+                        'created_at' => now(),
+                        'updated_at' => now()
                     ]
                 ];
                 DB::table('positions')->insert($positions);
@@ -60,11 +74,15 @@ class PositionsTableSeeder extends Seeder
                 $positions = [
                     [
                         'number' => 1,
-                        'room_id' => $room->room_id
+                        'room_id' => $room->room_id,
+                        'created_at' => now(),
+                        'updated_at' => now()
                     ],
                     [
                         'number' => 2,
-                        'room_id' => $room->room_id
+                        'room_id' => $room->room_id,
+                        'created_at' => now(),
+                        'updated_at' => now()
                     ]
                 ];
                 DB::table('positions')->insert($positions);

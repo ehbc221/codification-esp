@@ -15,16 +15,6 @@ class Student extends Model
         return $this->belongsTo('App\User');
     }
 
-    public function department()
-    {
-        return $this->belongsTo('App\Department');
-    }
-
-    public function formation()
-    {
-        return $this->belongsTo('App\Formation');
-    }
-
     public function grade()
     {
         return $this->belongsTo('App\Grade');

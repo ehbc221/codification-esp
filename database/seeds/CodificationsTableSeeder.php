@@ -12,28 +12,19 @@ class CodificationsTableSeeder extends Seeder
      */
     public function run()
     {
-        $this->disableForeignKeys();
-        $this->truncate('codifications');
-
-        $reservations = \App\Models\Reservation::all();
-
+        $reservations = \App\Reservation::all();
         $codifications = [];
-
         foreach ($reservations as $reservation) {
             if ($reservation->is_validated) {
                 $codification = [];
-
-                $codification['codification_periode_id'] = $reservations->codification_periode_id;
-                $codification['student_id'] = $reservations->student_id;
-                $codification['room_id'] = $reservations->room_id;
-                $codification['position_id'] = $reservations->position_id;
-
-                array_push($reservations, $reservation);
+                $codification['codification_periode_id'] = $reservation->codification_periode_id;
+                $codification['student_id'] = $reservation->student_id;
+                $codification['position_id'] = $reservation->position_id;
+                $codification['created_at'] = now();
+                $codification['updated_at'] = now();
+                array_push($codifications, $codification);
             }
         }
-
         DB::table('codifications')->insert($codifications);
-
-        $this->enableForeignKeys();
     }
 }
