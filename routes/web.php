@@ -27,6 +27,11 @@ Route::group(['prefix' => 'etudiant', 'as' => 'student.', 'namespace' => 'Studen
     // Dashboard
     Route::get('dashboard', 'DashboardController')->name('dashboard');
 
+    Route::resource('codifications', 'CodificationController');
+    Route::resource('echanges', 'ExchangeController');
+    Route::resource('profil', 'ProfileController', ['only' => ['show', 'edit', 'update']]);
+    Route::resource('reservations', 'ReservationController');
+
 });
 
 /**

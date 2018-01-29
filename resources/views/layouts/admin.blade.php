@@ -52,33 +52,33 @@
     </div>
     <!-- =============== VENDOR SCRIPTS ===============-->
     <!-- MODERNIZR-->
-        <script src="{{ asset('angle/vendor/modernizr/modernizr.js') }}"></script>
+    <script src="{{ asset('angle/vendor/modernizr/modernizr.js') }}"></script>
     <!-- JQUERY-->
-        <script src="{{ asset('angle/vendor/jquery/dist/jquery.js') }}"></script>
+    <script src="{{ asset('angle/vendor/jquery/dist/jquery.js') }}"></script>
     <!-- BOOTSTRAP-->
-        <script src="{{ asset('angle/vendor/bootstrap/dist/js/bootstrap.js') }}"></script>
+    <script src="{{ asset('angle/vendor/bootstrap/dist/js/bootstrap.js') }}"></script>
     <!-- STORAGE API-->
-        <script src="{{ asset('angle/vendor/jQuery-Storage-API/jquery.storageapi.js') }}"></script>
+    <script src="{{ asset('angle/vendor/jQuery-Storage-API/jquery.storageapi.js') }}"></script>
     <!-- JQUERY EASING-->
-        <script src="{{ asset('angle/vendor/jquery.easing/js/jquery.easing.js') }}"></script>
+    <script src="{{ asset('angle/vendor/jquery.easing/js/jquery.easing.js') }}"></script>
     <!-- ANIMO-->
-        <script src="{{ asset('angle/vendor/animo.js/animo.js') }}"></script>
+    <script src="{{ asset('angle/vendor/animo.js/animo.js') }}"></script>
     <!-- SLIMSCROLL-->
-        <script src="{{ asset('angle/vendor/slimScroll/jquery.slimscroll.min.js') }}"></script>
+    <script src="{{ asset('angle/vendor/slimScroll/jquery.slimscroll.min.js') }}"></script>
     <!-- SCREENFULL-->
-        <script src="{{ asset('angle/vendor/screenfull/dist/screenfull.js') }}"></script>
+    <script src="{{ asset('angle/vendor/screenfull/dist/screenfull.js') }}"></script>
     <!-- LOCALIZE-->
-        <script src="{{ asset('angle/vendor/jquery-localize-i18n/dist/jquery.localize.js') }}"></script>
+    <script src="{{ asset('angle/vendor/jquery-localize-i18n/dist/jquery.localize.js') }}"></script>
     <!-- RTL demo-->
-        <script src="{{ asset('angle/app/js/demo/demo-rtl.js') }}"></script>
+    <script src="{{ asset('angle/app/js/demo/demo-rtl.js') }}"></script>
     <!-- SWEET ALERT -->
-        <script src="{{ asset('angle/vendor/sweetalert/dist/sweetalert2.all.min.js') }}"></script>
+    <script src="{{ asset('angle/vendor/sweetalert/dist/sweetalert2.all.min.js') }}"></script>
     <!-- =============== PAGE VENDOR SCRIPTS ===============-->
     <!-- =============== APP SCRIPTS ===============-->
-        <script src="{{ asset('angle/app/js/app.js') }}"></script>
-        <script src="{{ asset('js/scripts.js') }}"></script>
+    <script src="{{ asset('angle/app/js/app.js') }}"></script>
+    <script src="{{ asset('js/scripts.js') }}"></script>
     <!-- CUSTOM JS -->
-        @stack('scripts')
+    @stack('scripts')
     </body>
 
 </html>

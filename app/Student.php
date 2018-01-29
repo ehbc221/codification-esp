@@ -35,4 +35,13 @@ class Student extends Model
         return $this->hasMany('App\Exchange');
     }
 
+    public static function getStudentProfile($id)
+    {
+        return Student::join('users', 'students.user_id', 'users.id')
+            ->join('grades', 'students.grade_id', 'grades.id')
+            ->where('students.id', $id)
+            ->select('users.id as user_id', 'students.id', 'users.name', 'users.email', 'users.phone', 'users.cin', 'users.matriculation', 'students.date_of_birth', 'students.place_of_birth', 'students.sex', 'grades.id as grade_id', 'students.is_foreign', 'students.native_country')
+            ->first();
+    }
+
 }

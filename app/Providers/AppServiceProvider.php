@@ -14,7 +14,10 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        $controller_name = 'Controller';
+        $action_name = 'Action';
+
+        View::share(['controller_name' => $controller_name, 'action_name' => $action_name]);
     }
 
     /**
