@@ -18,8 +18,8 @@ class CreateCodificationPeriodesTable extends Migration
             $table->string('name');
             $table->year('school_year_start')->unique();
             $table->year('school_year_end')->unique();
-            $table->dateTime('start_date');
-            $table->dateTime('end_date');
+            $table->date('start_date');
+            $table->date('end_date');
             $table->timestamps();
         });
     }
