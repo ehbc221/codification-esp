@@ -25,4 +25,23 @@ class Codification extends Model
         return $this->belongsTo('App\Position');
     }
 
+    public static function getCodification($id)
+    {
+        return Codification::join('codification_periodes', 'codifications.codification_periode_id', 'codification_periodes.id')
+            ->join('students', 'codifications.student_id', 'students.id')
+            ->select('codifications.id', 'codifications.name as codification_name', 'codification_periodes.name as codification_periode_name')
+            ->where('codifications.id', $id)
+            ->first();
+    }
+
+    public static function getCodificationsShortList($limit = 15)
+    {
+        return Codification::join('codification_periodes', 'codifications.codification_periode_id', 'codification_periodes.id')
+            ->select('codifications.id', 'codifications.name as codification_name', 'codification_periodes.name as codification_periode_name')
+            ->OrderBy('codification_periodes.name', 'ASC')
+            ->orDerBy('codifications.name', 'ASC')
+            ->withCount('grades')
+            ->paginate($limit);
+    }
+
 }

@@ -30,6 +30,14 @@ class CodificationPeriode extends Model
         return $this->hasMany('App\Constraint');
     }
 
+    public static function getCurrentCodificationPeriode()
+    {
+        return CodificationPeriode::select('id')
+            ->where('start_date', '<', now())
+            ->where('end_date', '>', now())
+            ->first();
+    }
+
     public static function getCodificationPeriodesOptionList()
     {
         return CodificationPeriode::select('id', 'name')

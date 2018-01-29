@@ -18,6 +18,7 @@ class CreateReservationsTable extends Migration
             $table->integer('codification_periode_id')->unsigned();
             $table->integer('student_id')->unsigned()->nullable();
             $table->integer('position_id')->unsigned();
+            $table->string('validation_code')->nullable();
             $table->boolean('is_validated')->default(false);
             $table->timestamps();
 

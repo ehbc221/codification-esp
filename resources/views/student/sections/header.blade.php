@@ -27,13 +27,21 @@
                     <a href="#" data-toggle="dropdown"><i class="fa fa-credit-card"></i> Profil</a>
                     <ul class="dropdown-menu animated fadeIn">
                         <li><a href="{{ route('student.profil.show', ['id' => Auth::user()->id]) }}"><i class="fa fa-user"></i> Mon Compte</a></li>
-                        <li><a href="#"><span class="text-danger"><i class="fa fa-sign-out"></i> Déconnexion</span></a></li>
+                        <li>
+                            <a href="{{ route('logout') }}" onclick="event.preventDefault();
+                                                                    document.getElementById('logout-form').submit();"
+                               style="color: red;">
+
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                {{ csrf_field() }}
+                            </form>
+                            <span class="text-danger"><i class="fa fa-sign-out"></i> Déconnexion</span></a></li>
                     </ul>
                 </li>
                 <li><a href="{{ route('student.dashboard') }}"><i class="fa fa-dashboard"></i> Dashboard</a></li>
-                <li><a href="#"><i class="fa fa-check-circle"></i> Codification</a></li>
-                <li><a href="#"><i class="fa fa-clock-o"></i> Réservation</a></li>
-                <li><a href="#"><i class="fa fa-exchange"></i> Échange</a></li>
+                <li><a href="{{ route('student.codifications.index') }}"><i class="fa fa-check-circle"></i> Codification</a></li>
+                <li><a href="{{ route('student.reservations.index') }}"><i class="fa fa-clock-o"></i> Réservation</a></li>
+                <li><a href="{{ route('student.echanges.index') }}"><i class="fa fa-exchange"></i> Échange</a></li>
             </ul>
             <!-- END Left navbar-->
             <!-- START Right Navbar-->

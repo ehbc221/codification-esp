@@ -18,6 +18,12 @@ class ProfileController extends Controller
         View::share('controller_name', 'Mon Compte');
     }
 
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
     public function show($id)
     {
         if (Auth::user()->id != $id) {
@@ -32,6 +38,12 @@ class ProfileController extends Controller
         return view('student.profile.show', compact(['action_name', 'student']));
     }
 
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
     public function edit($id)
     {
         if (Auth::user()->id != $id) {
@@ -47,6 +59,13 @@ class ProfileController extends Controller
         return view('student.profile.edit', compact(['action_name', 'student', 'grades', 'sexes']));
     }
 
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param UserRequest $request
+     * @param  int $id
+     * @return \Illuminate\Http\Response
+     */
     public function update(StudentProfileRequest $request, $id)
     {
         if (Auth::user()->id != $id) {
