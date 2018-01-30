@@ -32,7 +32,7 @@ class ReservationController extends Controller
         $reservations = Reservation::getReservationsShortList(Auth::user()->id);
         foreach ($reservations as $reservation) {
             $position = Position::getPosition($reservation->position_id);
-            $reservation['position_name'] = $position->position_number . ' (' . $position->block_name . ' - ' . $position->floor_number . ' - ' . $position->lane_name . ' - ' . $position->room_number . ')';
+            $reservation['position_name'] = $position->block_name . ' - Étage ' . $position->floor_number . ' - Couloir ' . $position->lane_name . ' - Chambre ' . $position->room_number . ' - Position ' . $position->position_number;
         }
 
         $action_name = 'Liste';
@@ -46,7 +46,10 @@ class ReservationController extends Controller
      */
     public function create()
     {
-        $this->protectFromCreate();
+        if (!CodificationPeriode::isOpened() || Student::hasCurrentReservation(Auth::user()->id)) {
+            return redirect()->route('student.reservations.index')
+                ->with('error', 'Impossible d\'ajouter une réservation maintenant.');
+        }
 
         $codification_periode = CodificationPeriode::getCurrentCodificationPeriodeToArray();
         $student = Student::getStudentToArray(Auth::user()->id);
@@ -64,7 +67,10 @@ class ReservationController extends Controller
      */
     public function store(ReservationRequest $request)
     {
-        $this->protectFromCreate();
+        if (!CodificationPeriode::isOpened() || Student::hasCurrentReservation(Auth::user()->id)) {
+            return redirect()->route('student.reservations.index')
+                ->with('error', 'Impossible d\'ajouter une réservation maintenant.');
+        }
 
         $input = [
             'codification_periode_id' => (CodificationPeriode::getCurrentCodificationPeriode())->id,
@@ -95,7 +101,7 @@ class ReservationController extends Controller
 
         $reservation = Reservation::getReservation($id);
         $position = Position::getPosition($reservation->position_id);
-        $reservation['position_number'] = $position['position_number'] . ' (' . $position['block_name'] . ' - ' . $position['floor_number'] . ' - ' . $position['lane_name'] . ' - ' . $position['room_number'] . ')';
+        $reservation['position_number'] = $position['block_name'] . ' - Étage ' . $position['floor_number'] . ' - Couloir ' . $position['lane_name'] . ' - Chambre ' . $position['room_number'] . ' - Position ' . $position['position_number'];
         $student = Student::getStudent($reservation['student_id']);
         $reservation['student_name'] = $student->name;
 
@@ -114,7 +120,10 @@ class ReservationController extends Controller
      */
     public function edit($id)
     {
-        $this->protectFromUpdateOrDelete($id, 'Impossible de modifier cette réservation.');
+        if (!(Reservation::isInCurrentCodificationPeriode($id) && Student::isOwner($id))) {
+            return redirect()->route('student.reservations.index')
+                ->with('error', 'Impossible de modifier cette réservation.');
+        }
 
         $reservation = Reservation::findOrFail($id);
 
@@ -142,7 +151,10 @@ class ReservationController extends Controller
      */
     public function update(ReservationRequest $request, $id)
     {
-        $this->protectFromUpdateOrDelete($id, 'Impossible de modifier cette réservation.');
+        if (!(CodificationPeriode::isOpened() && Reservation::isInCurrentCodificationPeriode($id) && Student::isOwner($id))) {
+            return redirect()->route('student.reservations.index')
+                ->with('error', 'Impossible de modifier cette réservation.');
+        }
 
         $reservation = Reservation::findOrFail($id);
 
@@ -166,7 +178,10 @@ class ReservationController extends Controller
      */
     public function destroy($id)
     {
-        $this->protectFromUpdateOrDelete($id, 'Impossible de supprimer cette réservation.');
+        if (!(CodificationPeriode::isOpened() && Reservation::isInCurrentCodificationPeriode($id) && Student::isOwner($id))) {
+            return redirect()->route('student.reservations.index')
+                ->with('error', 'Impossible de supprimer cette réservation.');
+        }
 
         $reservation = Reservation::findOrFail($id);
 
@@ -174,24 +189,6 @@ class ReservationController extends Controller
 
         return redirect()->route('student.reservations.index')
             ->with('success', 'Réservation supprimée avec succès.');
-    }
-
-    private function protectFromCreate()
-    {
-        if (!(CodificationPeriode::isOpened())) {
-            return redirect()->route('student.reservations.index')
-                ->with('error', 'Impossible de réserver maintenant.');
-        }
-        return true;
-    }
-
-    private function protectFromUpdateOrDelete($id, $message = 'Impossible')
-    {
-        if (!(CodificationPeriode::isOpened() && Reservation::isInCurrentCodificationPeriode($id) && Student::isOwner($id))) {
-            return redirect()->route('student.reservations.index')
-                ->with('error', $message);
-        }
-        return true;
     }
 
 }

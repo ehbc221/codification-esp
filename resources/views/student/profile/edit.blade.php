@@ -141,7 +141,7 @@
                                 <div class="form-group  {{ $errors->has('date_of_birth') ? ' has-error' : '' }}">
                                     {!!  Form::label('date_of_birth', 'Date De Naissance <em class="text text-danger">*</em>', ['class' => 'col-md-2 col-sm-2 control-label'], false) !!}
                                     <div class="col-md-6 col-sm-10">
-                                        {!! Form::text('date_of_birth', null, ['class' => 'form-control', 'id' => 'date_of_birth', 'value' => old('date_of_birth'), 'required' => 'required', 'autofocus' => 'on']) !!}
+                                        {!! Form::text('date_of_birth', null, ['class' => 'form-control', 'id' => 'date_of_birth', 'value' => old('date_of_birth'), 'required' => 'required']) !!}
 
                                         @if ($errors->has('date_of_birth'))
                                             <div class="help-block">
@@ -157,7 +157,7 @@
                                 <div class="form-group  {{ $errors->has('place_of_birth') ? ' has-error' : '' }}">
                                     {!!  Form::label('place_of_birth', 'Lieu De Naissance <em class="text text-danger">*</em>', ['class' => 'col-md-2 col-sm-2 control-label'], false) !!}
                                     <div class="col-md-6 col-sm-10">
-                                        {!! Form::text('place_of_birth', null, ['class' => 'form-control', 'id' => 'place_of_birth', 'value' => old('place_of_birth'), 'required' => 'required', 'autofocus' => 'on']) !!}
+                                        {!! Form::text('place_of_birth', null, ['class' => 'form-control', 'id' => 'place_of_birth', 'value' => old('place_of_birth'), 'required' => 'required']) !!}
 
                                         @if ($errors->has('place_of_birth'))
                                             <div class="help-block">
@@ -173,7 +173,7 @@
                                 <div class="form-group  {{ $errors->has('sex') ? ' has-error' : '' }}">
                                     {!!  Form::label('sex', 'Sexe <em class="text text-danger">*</em>', ['class' => 'col-md-2 col-sm-2 control-label'], false) !!}
                                     <div class="col-md-6 col-sm-10">
-                                        {!! Form::select('sex', $sexes, old('sex'), ['class' => 'form-control', 'id' => 'sex', 'placeholder' => 'Sélectionnez un sexe...', 'required' => 'required', 'autofocus' => 'on']) !!}
+                                        {!! Form::select('sex', $sexes, old('sex'), ['class' => 'form-control', 'id' => 'sex', 'placeholder' => 'Sélectionnez un sexe...', 'required' => 'required']) !!}
 
                                         @if ($errors->has('sex'))
                                             <div class="help-block">
@@ -189,7 +189,7 @@
                                 <div class="form-group  {{ $errors->has('grade_id') ? ' has-error' : '' }}">
                                     {!!  Form::label('grade_id', 'Niveau <em class="text text-danger">*</em>', ['class' => 'col-md-2 col-sm-2 control-label'], false) !!}
                                     <div class="col-md-6 col-sm-10">
-                                        {!! Form::select('grade_id', $grades, old('grade_id'), ['class' => 'form-control', 'id' => 'grade_id', 'placeholder' => 'Sélectionnez un niveau', 'required' => 'required', 'autofocus' => 'on']) !!}
+                                        {!! Form::select('grade_id', $grades, old('grade_id'), ['class' => 'form-control', 'id' => 'grade_id', 'placeholder' => 'Sélectionnez un niveau', 'required' => 'required']) !!}
 
                                         @if ($errors->has('grade_id'))
                                             <div class="help-block">
@@ -205,7 +205,7 @@
                                 <div class="form-group  {{ $errors->has('is_foreign') ? ' has-error' : '' }}">
                                     {!!  Form::label('is_foreign', 'Etranger ? <em class="text text-danger">*</em>', ['class' => 'col-md-2 col-sm-2 control-label'], false) !!}
                                     <div class="col-md-6 col-sm-10">
-                                        {!! Form::select('is_foreign', ['oui' => 'Oui', 'non' => 'Non'], old('is_foreign'), ['class' => 'form-control', 'id' => 'is_foreign', 'autofocus' => 'on']) !!}
+                                        {!! Form::select('is_foreign', ['oui' => 'Oui', 'non' => 'Non'], old('is_foreign'), ['class' => 'form-control', 'id' => 'is_foreign']) !!}
 
                                         @if ($errors->has('is_foreign'))
                                             <div class="help-block">
@@ -221,7 +221,7 @@
                                 <div class="form-group  {{ $errors->has('native_country') ? ' has-error' : '' }}">
                                     {!!  Form::label('native_country', 'Pays D\'Origine <em class="text text-danger">*</em>', ['class' => 'col-md-2 col-sm-2 control-label'], false) !!}
                                     <div class="col-md-6 col-sm-10">
-                                        {!! Form::text('native_country', null, ['class' => 'form-control', 'id' => 'native_country', 'value' => old('native_country'), 'required' => 'required', 'autofocus' => 'on']) !!}
+                                        {!! Form::select('native_country', $countries, old('native_country'), ['class' => 'form-control', 'id' => 'native_country', 'placeholder' => 'Sélectionnez un pays...', 'required' => 'required']) !!}
 
                                         @if ($errors->has('native_country'))
                                             <div class="help-block">
@@ -247,7 +247,7 @@
                             {!! Form::close() !!}
 
                             <div class="col-md-2 col-sm-2">
-                                <a href="{{ route('student.profil.show', ['id' => $student->id]) }}"><span class="btn btn-default" id="button-show" data-toggle="tooltip" data-placement="top" title="Détails"><i class="fa fa-eye"></i> Détails</span></a>
+                                <a href="{{ route('student.profil.show', ['id' => $student->user_id]) }}"><span class="btn btn-default" id="button-show" data-toggle="tooltip" data-placement="top" title="Détails"><i class="fa fa-eye"></i> Détails</span></a>
                             </div>
                         </div>
                     </div>

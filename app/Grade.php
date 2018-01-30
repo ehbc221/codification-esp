@@ -32,8 +32,9 @@ class Grade extends Model
     public static function getGradesOptionList()
     {
         return Grade::join('formations', 'grades.formation_id', 'formations.id')
-            ->select('grades.id', 'grades.number as grade_number', 'formations.name as formation_name')
-            ->OrderBy('name', 'ASC')
+            ->join('departments', 'formations.department_id', 'departments.id')
+            ->select('grades.id', 'grades.number as grade_number', 'formations.name as formation_name', 'departments.name as department_name')
+            ->OrderBy('formations.name', 'ASC')
             ->get();
     }
 
@@ -52,7 +53,7 @@ class Grade extends Model
     {
         $grades = Grade::getGradesOptionList();
         $grades = $grades->mapWithKeys(function ($item) {
-            return [$item['id'] => $item['grade_number'] . ' (' . $item['formation_name'] . ')'];
+            return [$item['id'] => $item['department_name'] . ' - ' . $item['formation_name'] . ' ' . $item['grade_number']];
         })->toArray();
         return $grades;
     }

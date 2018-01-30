@@ -1,47 +1,38 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
-    <div class="row">
-        <div class="col-md-8 col-md-offset-2">
-            <div class="panel panel-default">
-                <div class="panel-heading">Reset Password</div>
-
-                <div class="panel-body">
-                    @if (session('status'))
-                        <div class="alert alert-success">
-                            {{ session('status') }}
-                        </div>
-                    @endif
-
-                    <form class="form-horizontal" method="POST" action="{{ route('password.email') }}">
-                        {{ csrf_field() }}
-
-                        <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
-                            <label for="email" class="col-md-4 control-label">E-Mail Address</label>
-
-                            <div class="col-md-6">
-                                <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" required>
-
-                                @if ($errors->has('email'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('email') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <div class="col-md-6 col-md-offset-4">
-                                <button type="submit" class="btn btn-primary">
-                                    Send Password Reset Link
-                                </button>
-                            </div>
-                        </div>
-                    </form>
+    <!-- START panel-->
+    <div class="panel panel-dark panel-flat">
+        <div class="panel-heading text-center">
+            <a href="#">
+                <img src="{{ asset('angle/app/img/logo.png') }}" alt="Image" class="block-center img-rounded">
+            </a>
+        </div>
+        <div class="panel-body">
+            @if (session('status'))
+                <div class="alert alert-success">
+                    {{ session('status') }}
                 </div>
-            </div>
+            @endif
+
+            <p class="text-center pv">Récuperation mot de passe</p>
+            <form method="POST" action="{{ route('password.email') }}" role="form">
+                {{ csrf_field() }}
+                <p class="text-center">Saisissez votre adresse E-Mail et vous recevrez les instructions pour récupérer votre mot de passe.</p>
+                <div class="form-group has-feedback {{ $errors->has('email') ? ' has-error' : '' }}">
+                    <label for="resetInputEmail1" class="text-muted">Email address</label>
+                    <input id="resetInputEmail1" type="email" name="email" value="{{ $email or old('email') }}" placeholder="Enter email" autocomplete="off" class="form-control">
+                    <span class="fa fa-envelope form-control-feedback text-muted"></span>
+
+                    @if ($errors->has('email'))
+                        <p class="help-block">
+                            <strong>{{ $errors->first('email') }}</strong>
+                        </p>
+                    @endif
+                </div>
+                <button type="submit" class="btn btn-danger btn-block">M'envoyer le lien de récupération</button>
+            </form>
         </div>
     </div>
-</div>
+    <!-- END panel-->
 @endsection

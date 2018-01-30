@@ -62,7 +62,20 @@ class Student extends Model
 
     public static function isOwner($id)
     {
-        return (Auth::user()->id === $id);
+        return (Auth::user()->id === Reservation::studentId($id));
+    }
+
+    public static function hasCurrentReservation($id)
+    {
+        if (!CodificationPeriode::isOpened()) {
+            return false;
+        }
+        $codification_periode = CodificationPeriode::getCurrentCodificationPeriode();
+        $reservation = Reservation::select('id')
+            ->where('reservations.codification_periode_id', $codification_periode->id)
+            ->where('reservations.student_id', $id)
+            ->first();
+        return ($reservation) ? true : false;
     }
 
 }

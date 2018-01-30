@@ -1,80 +1,75 @@
 <!DOCTYPE html>
 <html lang="{{ app()->getLocale() }}">
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <!-- CSRF Token -->
-    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+        <meta name="description" content="Codification ESP">
+        <meta name="keywords" content="ESP, UCAD, codification, université">
+        <title>{{ config('APP_NAME', 'Codification ESP') }} | {{ $controller_name or 'Composant' }} - {{ $action_name or 'Action' }}</title>
+        <!-- =============== VENDOR STYLES ===============-->
+        <!-- FONT AWESOME-->
+        <link href="{{ asset('angle/vendor/fontawesome/css/font-awesome.min.css') }}" rel="stylesheet">
+        <!-- SIMPLE LINE ICONS-->
+        <link href="{{ asset('angle/vendor/simple-line-icons/css/simple-line-icons.css') }}" rel="stylesheet">
+        <!-- ANIMATE.CSS-->
+        <link href="{{ asset('angle/vendor/animate.css/animate.min.css') }}" rel="stylesheet">
+        <!-- WHIRL (spinners)-->
+        <link href="{{ asset('angle/vendor/whirl/dist/whirl.css') }}" rel="stylesheet">
+        <!-- SWEETALERT-->
+        <link href="{{ asset('angle/vendor/sweetalert/dist/sweetalert.css') }}" rel="stylesheet">
+        <!-- =============== PAGE VENDOR STYLES ===============-->
+        <!-- =============== BOOTSTRAP STYLES ===============-->
+        <link href="{{ asset('angle/app/css/bootstrap.css') }}" rel="stylesheet" id="bscss">
+        <!-- =============== APP STYLES ===============-->
+        <link href="{{ asset('angle/app/css/app.css') }}" rel="stylesheet" id="maincss">
+        <!-- CUSTOM CSS -->
+        @stack('styles')
+    </head>
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
-
-    <!-- Styles -->
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-</head>
-<body>
-    <div id="app">
-        <nav class="navbar navbar-default navbar-static-top">
-            <div class="container">
-                <div class="navbar-header">
-
-                    <!-- Collapsed Hamburger -->
-                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#app-navbar-collapse" aria-expanded="false">
-                        <span class="sr-only">Toggle Navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-
-                    <!-- Branding Image -->
-                    <a class="navbar-brand" href="{{ url('/') }}">
-                        {{ config('app.name', 'Laravel') }}
-                    </a>
-                </div>
-
-                <div class="collapse navbar-collapse" id="app-navbar-collapse">
-                    <!-- Left Side Of Navbar -->
-                    <ul class="nav navbar-nav">
-                        &nbsp;
-                    </ul>
-
-                    <!-- Right Side Of Navbar -->
-                    <ul class="nav navbar-nav navbar-right">
-                        <!-- Authentication Links -->
-                        @guest
-                            <li><a href="{{ route('login') }}">Login</a></li>
-                            <li><a href="{{ route('register') }}">Register</a></li>
-                        @else
-                            <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true">
-                                    {{ Auth::user()->name }} <span class="caret"></span>
-                                </a>
-
-                                <ul class="dropdown-menu">
-                                    <li>
-                                        <a href="{{ route('logout') }}"
-                                            onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                            Logout
-                                        </a>
-
-                                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                            {{ csrf_field() }}
-                                        </form>
-                                    </li>
-                                </ul>
-                            </li>
-                        @endguest
-                    </ul>
-                </div>
+    <body>
+    <div class="wrapper">
+        <div class="block-center mt-xl wd-xl">
+            @yield('content')
+            <!-- Page footer-->
+            <div class="p-lg text-center">
+                <span>&copy;</span>
+                <span>{{ date('Y') }}</span>
+                <span>-</span>
+                <span>{{ config('app.name') }}</span>
             </div>
-        </nav>
-
-        @yield('content')
+        </div>
+        @include('admin.sections.footer')
     </div>
+    <!-- =============== VENDOR SCRIPTS ===============-->
+    <!-- MODERNIZR-->
+    <script src="{{ asset('angle/vendor/modernizr/modernizr.js') }}"></script>
+    <!-- JQUERY-->
+    <script src="{{ asset('angle/vendor/jquery/dist/jquery.js') }}"></script>
+    <!-- BOOTSTRAP-->
+    <script src="{{ asset('angle/vendor/bootstrap/dist/js/bootstrap.js') }}"></script>
+    <!-- STORAGE API-->
+    <script src="{{ asset('angle/vendor/jQuery-Storage-API/jquery.storageapi.js') }}"></script>
+    <!-- JQUERY EASING-->
+    <script src="{{ asset('angle/vendor/jquery.easing/js/jquery.easing.js') }}"></script>
+    <!-- ANIMO-->
+    <script src="{{ asset('angle/vendor/animo.js/animo.js') }}"></script>
+    <!-- SLIMSCROLL-->
+    <script src="{{ asset('angle/vendor/slimScroll/jquery.slimscroll.min.js') }}"></script>
+    <!-- SCREENFULL-->
+    <script src="{{ asset('angle/vendor/screenfull/dist/screenfull.js') }}"></script>
+    <!-- LOCALIZE-->
+    <script src="{{ asset('angle/vendor/jquery-localize-i18n/dist/jquery.localize.js') }}"></script>
+    <!-- RTL demo-->
+    <script src="{{ asset('angle/app/js/demo/demo-rtl.js') }}"></script>
+    <!-- SWEET ALERT -->
+    <script src="{{ asset('angle/vendor/sweetalert/dist/sweetalert2.all.min.js') }}"></script>
+    <!-- =============== PAGE VENDOR SCRIPTS ===============-->
+    <!-- =============== APP SCRIPTS ===============-->
+    <script src="{{ asset('angle/app/js/app.js') }}"></script>
+    <script src="{{ asset('js/scripts.js') }}"></script>
+    <!-- CUSTOM JS -->
+    @stack('scripts')
+    </body>
 
-    <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}"></script>
-</body>
 </html>

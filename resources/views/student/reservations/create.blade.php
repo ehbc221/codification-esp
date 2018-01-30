@@ -15,7 +15,7 @@
                 </div>
                 <div class="panel-body">
                     <div class="row">
-                        <div class="col-md-8 col-md-offset-2 col-sm-12">
+                        <div class="col-md-11 col-md-offset-1 col-sm-12">
                             @if(!($codification_periode && $student && $positions))
                                 <h3 class="text text-center text-danger"><i class="fa fa-info-circle"></i> Impossible de réserver maintenant.</h3>
                             @else

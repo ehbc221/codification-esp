@@ -18,7 +18,7 @@
                         {!! Form::token() !!}
                         {!!  Form::hidden('id', $reservation->id) !!}
 
-                        <div class="col-md-8 col-md-offset-2 col-sm-12">
+                        <div class="col-md-11 col-sm-offset-1 col-sm-12">
                             <div class="form-group  {{ $errors->has('codification_periode_id') ? ' has-error' : '' }}">
                                 {!!  Form::label('codification_periode_id', 'Période De Condification <em class="text text-danger">*</em>', ['class' => 'col-md-2 col-sm-2 control-label'], false) !!}
                                 <div class="col-md-6 col-sm-10">

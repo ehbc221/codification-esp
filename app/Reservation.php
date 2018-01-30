@@ -48,7 +48,13 @@ class Reservation extends Model
     public static function isInCurrentCodificationPeriode($id)
     {
         $reservation = Reservation::findOrFail($id);
-        return (CodificationPeriode::isOpened() && ((CodificationPeriode::getCurrentCodificationPeriode())->id === $reservation->id));
+        return (CodificationPeriode::isOpened() && ((CodificationPeriode::getCurrentCodificationPeriode())->id === $reservation->codification_periode_id));
+    }
+
+    public static function studentId($id)
+    {
+        $reservation = Reservation::findOrFail($id);
+        return ($reservation) ? $reservation->student_id : null;
     }
 
 }

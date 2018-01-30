@@ -18,7 +18,9 @@ class GradesTableSeeder extends Seeder
                 $grades = [
                     [
                         'number' => 1,
-                        'formation_id' => $formation->id
+                        'formation_id' => $formation->id,
+                        'created_at' => now(),
+                        'updated_at' => now()
                     ]
                 ];
             DB::table('grades')->insert($grades);

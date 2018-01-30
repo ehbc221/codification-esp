@@ -30,8 +30,8 @@
                     <thead class="bg-info-light">
                     <tr>
                         <th class="col-md-1">Id</th>
-                        <th class="col-md-3">Période de Codification</th>
-                        <th class="col-md-4">Position</th>
+                        <th class="col-md-2">Période de Codification</th>
+                        <th class="col-md-5">Position</th>
                         <th class="col-md-4">Actions</th>
                     </tr>
                     </thead>

@@ -11,10 +11,14 @@
 |
 */
 
-
 Route::get('/', function () {
     return view('welcome');
 })->name('accueil');
+
+Route::get('dashboard', function () {
+    $route = ((Auth::user())->role->name === 'admin') ? 'admin.dashboard' : 'student.dashboard';
+    return redirect()->route($route);
+})->name('dashboard');
 
 /**
  * AUTH

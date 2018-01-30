@@ -16,12 +16,12 @@ class CreateStudentsTable extends Migration
         Schema::create('students', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('user_id')->unsigned()->unique();
-            $table->date('date_of_birth');
-            $table->string('place_of_birth');
-            $table->enum('sex', ['Masculin', 'Féminin']);
-            $table->integer('grade_id')->unsigned();
-            $table->boolean('is_foreign')->default(false);
-            $table->string('native_country')->default('Sénégal');
+            $table->date('date_of_birth')->nullable();
+            $table->string('place_of_birth')->nullable();
+            $table->enum('sex', ['Masculin', 'Féminin'])->nullable();
+            $table->integer('grade_id')->unsigned()->nullable();
+            $table->boolean('is_foreign')->nullable();
+            $table->string('native_country')->nullable();
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
