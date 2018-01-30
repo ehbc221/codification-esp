@@ -92,8 +92,8 @@ class ReservationController extends Controller
         $reservation = Reservation::getReservation($id);
         $position = Position::getPosition($reservation->position_id);
         $reservation['position_number'] = $position['position_number'] . ' (' . $position['block_name'] . ' - ' . $position['floor_number'] . ' - ' . $position['lane_name'] . ' - ' . $position['room_number'] . ')';
-        $student = Student::findOrFail($reservation['student_id']);
-        $reservation = $student->name;
+        $student = Student::getStudent($reservation['student_id']);
+        $reservation['student_name'] = $student->name;
 
         $success = (session('success')) ? session('success') : null;
 
