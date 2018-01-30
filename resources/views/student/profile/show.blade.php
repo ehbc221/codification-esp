@@ -107,7 +107,7 @@
                     <div class="row">
                         <div class="col-md-8 col-md-offset-4 col-sm-12">
                             <div class="col-md-2 col-sm-2">
-                                <a href="{{ route('student.profil.edit', ['id' => $student->id]) }}"><span class="btn btn-primary" id="button-edit" data-toggle="tooltip" data-placement="top" title="Modifier"><i class="fa fa-pencil"></i> Modifier</span></a>
+                                <a href="{{ route('student.profil.edit', ['id' => $student->user_id]) }}"><div class="btn btn-primary" data-toggle="tooltip" data-placement="top" title="Modifier"><i class="fa fa-pencil"></i> Modifier</div></a>
                             </div>
                         </div>
                     </div>

@@ -44,17 +44,19 @@ class ReservationController extends Controller
      */
     public function create()
     {
-        $codification_periode = CodificationPeriode::getCurrentCodificationPeriode();
+        $codification_periode = CodificationPeriode::getCurrentCodificationPeriodeToArray();
 
-        if ($codification_periode->isEmpty()) {
+        if (empty($codification_periode)) {
             $positions = new Collection([]);
+            $student = new Collection([]);
         }
         else {
             $positions = Position::getPositionsOptionListToArray();
+            $student = Student::getStudentToArray(Auth::user()->id);
         }
 
         $action_name = 'Ajouter';
-        return view('student.reservations.create', compact(['action_name', 'codification_periode', 'positions']));
+        return view('student.reservations.create', compact(['action_name', 'codification_periode', 'student', 'positions']));
     }
 
     /**
@@ -66,9 +68,9 @@ class ReservationController extends Controller
     public function store(ReservationRequest $request)
     {
         $input = [
-            'codification_periode_id' => $request['codification_periode_id'],
-            'student_id' => $request['student_id'],
-            'position_id' => $request['position_id'],
+            'codification_periode_id' => (CodificationPeriode::getCurrentCodificationPeriode())->id,
+            'student_id' => (Student::getStudent(Auth::user()->id))->id,
+            'position_id' => $request->input('position_id'),
             'validation_code' => Uuid::uuid4(),
             'is_validated' => false,
         ];
@@ -110,17 +112,19 @@ class ReservationController extends Controller
     {
         $reservation = Reservation::findOrFail($id);
 
-        $codification_periode = CodificationPeriode::getCurrentCodificationPeriode();
+        $codification_periode = CodificationPeriode::getCurrentCodificationPeriodeToArray();
 
-        if ($codification_periode->isEmpty()) {
+        if (empty($codification_periode)) {
             $positions = new Collection([]);
+            $student = new Collection([]);
         }
         else {
             $positions = Position::getPositionsOptionListToArray();
+            $student = Student::getStudentToArray(Auth::user()->id);
         }
 
         $action_name = 'Modifier';
-        return view('student.reservations.edit', compact(['action_name', 'reservation', 'codification_periode', 'positions']));
+        return view('student.reservations.edit', compact(['action_name', 'reservation', 'codification_periode', 'student', 'positions']));
     }
 
     /**
@@ -135,9 +139,9 @@ class ReservationController extends Controller
         $reservation = Reservation::findOrFail($id);
 
         $input = [
-            'codification_periode_id' => $request['codification_periode_id'],
-            'student_id' => $request['student_id'],
-            'position_id' => $request['position_id']
+            'codification_periode_id' => (CodificationPeriode::getCurrentCodificationPeriode())->id,
+            'student_id' => (Student::getStudent(Auth::user()->id))->id,
+            'position_id' => $request->input('position_id'),
         ];
 
         $reservation->update($input);

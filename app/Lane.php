@@ -36,7 +36,7 @@ class Lane extends Model
             ->select('lanes.id', 'lanes.name as lane_name', 'floors.number as floor_number', 'blocks.name as block_name')
             ->OrderBy('blocks.name', 'ASC')
             ->OrderBy('floors.number', 'ASC')
-            ->OrderBy('lanes.name', 'ASC')
+            ->OrderBy('lanes.name', 'DESC')
             ->get();
     }
 

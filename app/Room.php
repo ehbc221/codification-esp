@@ -43,7 +43,7 @@ class Room extends Model
             ->select('rooms.id', 'rooms.number as room_number', 'lanes.name as lane_name', 'floors.number as floor_number', 'blocks.name as block_name')
             ->OrderBy('blocks.name', 'ASC')
             ->OrderBy('floors.number', 'ASC')
-            ->OrderBy('lanes.name', 'ASC')
+            ->OrderBy('lanes.name', 'DESC')
             ->OrderBy('rooms.number', 'ASC')
             ->get();
     }
@@ -56,8 +56,8 @@ class Room extends Model
             ->select('rooms.id', 'rooms.number as room_number', 'lanes.name as lane_name', 'floors.number as floor_number', 'blocks.name as block_name')
             ->OrderBy('blocks.name', 'ASC')
             ->OrderBy('floors.number', 'ASC')
-            ->OrderBy('lanes.name', 'ASC')
-            ->orDerBy('rooms.number', 'DESC')
+            ->OrderBy('lanes.name', 'DESC')
+            ->orDerBy('rooms.number', 'ASC')
             ->withCount('positions')
             ->paginate($limit);
     }

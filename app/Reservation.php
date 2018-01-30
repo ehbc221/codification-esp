@@ -27,9 +27,10 @@ class Reservation extends Model
 
     public static function getReservation($id)
     {
-        return Reservation::join('codification_periodes', 'formations.codification_periode_id', 'codification_periodes.id')
+        return Reservation::join('codification_periodes', 'reservations.codification_periode_id', 'codification_periodes.id')
+            ->join('students', 'reservations.student_id', 'students.id')
             ->join('positions', 'reservations.codification_periode_id', 'positions.id')
-            ->select('reservations.id', 'codification_periodes.name as codification_periode_name', 'positions.id as position_id')
+            ->select('reservations.id', 'codification_periodes.name as codification_periode_name', 'students.id as student_id', 'positions.id as position_id')
             ->where('reservations.id', $id)
             ->first();
     }
@@ -39,7 +40,7 @@ class Reservation extends Model
         return Reservation::join('codification_periodes', 'reservations.codification_periode_id', 'codification_periodes.id')
             ->join('positions', 'reservations.position_id', 'positions.id')
             ->select('reservations.id', 'codification_periodes.name as codification_periode_name', 'positions.id as position_id', 'positions.number as position_number')
-            ->OrderBy('codification_periodes.end_date', 'ASC')
+            ->OrderBy('codification_periodes.end_date', 'DESC')
             ->where('reservations.student_id', $id)
             ->paginate($limit);
     }

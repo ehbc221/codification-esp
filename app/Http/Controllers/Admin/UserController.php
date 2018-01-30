@@ -7,7 +7,6 @@ use App\Role;
 use App\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\View;
-use Ramsey\Uuid\Uuid;
 
 class UserController extends Controller
 {
@@ -38,7 +37,6 @@ class UserController extends Controller
     {
         $roles = [
             'admin' => 'Administrateur',
-            'student' => 'Étudiant'
         ];
 
         $action_name = 'Ajouter';
@@ -102,7 +100,6 @@ class UserController extends Controller
 
         $roles = [
             'admin' => 'Administrateur',
-            'student' => 'Étudiant'
         ];
 
         $action_name = 'Modifier';

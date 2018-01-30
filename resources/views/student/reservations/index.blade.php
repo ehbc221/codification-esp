@@ -11,8 +11,8 @@
                     </span>
                 </div>
                 <div class="col-md-12">
-                    <div class="col-md-1 col-md-offset-11">
-                        <a href="{{ route('admin.reservations.create') }}"><button class="btn btn-info"><i class="fa fa-plus"></i> Ajouter</button></a>
+                    <div class="col-md-1 col-md-offset-10">
+                        <a href="{{ route('student.reservations.create') }}"><button class="btn btn-info"><i class="fa fa-plus"></i> Ajouter</button></a>
                     </div>
                 </div>
             </div>
@@ -46,14 +46,14 @@
                                 </td>
                                 <td>{{ $reservation->position_name }}</td>
                                 <td class="forms-delete">
-                                    {!! Form::open(['route' => ['admin.reservations.destroy', $reservation->id], 'method' => 'delete', 'class' => 'form-inline']) !!}
+                                    {!! Form::open(['route' => ['student.reservations.destroy', $reservation->id], 'method' => 'delete', 'class' => 'form-inline']) !!}
                                     {!! Form::token() !!}
                                     {!! Form::hidden('id', $reservation->id) !!}
                                     <span>
-                                        <a href="{{ route('admin.reservations.show', ['id' => $reservation->id]) }}"><span class="btn btn-default" title="Voir"><i class="fa fa-eye"></i> Voir</span></a>
+                                        <a href="{{ route('student.reservations.show', ['id' => $reservation->id]) }}"><span class="btn btn-default" title="Voir"><i class="fa fa-eye"></i> Voir</span></a>
                                     </span>
                                     <span>
-                                        <a href="{{ route('admin.reservations.edit', ['id' => $reservation->id]) }}"><span class="btn btn-default" title="Modifier"><i class="fa fa-pencil"></i> Modifier</span></a>
+                                        <a href="{{ route('student.reservations.edit', ['id' => $reservation->id]) }}"><span class="btn btn-default" title="Modifier"><i class="fa fa-pencil"></i> Modifier</span></a>
                                     </span>
                                     <span>
                                         <span class="btn btn-danger" id="button-delete" title="Supprimer"><i class="fa fa-trash"></i> Supprimer</span>

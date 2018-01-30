@@ -68,7 +68,7 @@ class Position extends Model
     {
         $positions = Position::getPositionsOptionList();
         $positions = $positions->mapWithKeys(function ($item) {
-            return [$item['id'] => $item['name'] = $item['room_number'] . ' (' . $item['block_name'] . ' - ' . $item['floor_number'] . $item['lane_name'] . ')'];
+            return [$item['id'] => $item['name'] = $item['position_number'] . ' (' . $item['block_name'] . ' - ' . $item['floor_number'] . ' - ' . $item['lane_name'] . ' - ' . $item['room_number'] . ')'];
         })->toArray();
         return $positions;
     }

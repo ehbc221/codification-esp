@@ -39,9 +39,24 @@ class Student extends Model
     {
         return Student::join('users', 'students.user_id', 'users.id')
             ->join('grades', 'students.grade_id', 'grades.id')
-            ->where('students.id', $id)
+            ->where('users.id', $id)
             ->select('users.id as user_id', 'students.id', 'users.name', 'users.email', 'users.phone', 'users.cin', 'users.matriculation', 'students.date_of_birth', 'students.place_of_birth', 'students.sex', 'grades.id as grade_id', 'students.is_foreign', 'students.native_country')
             ->first();
+    }
+
+    public static function getStudent($id)
+    {
+        return Student::join('users', 'students.user_id', 'users.id')
+            ->select('students.id', 'users.name')
+            ->where('students.id', $id)
+            ->first();
+    }
+
+    public static function getStudentToArray($id)
+    {
+        $student = Student::getStudent($id);
+        $student = [$student->id => $student->name];
+        return $student;
     }
 
 }

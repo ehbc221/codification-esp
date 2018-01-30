@@ -64,6 +64,17 @@ class User extends Authenticatable
         return User::join('role_user', 'users.id', 'role_user.user_id')
             ->join('roles', 'role_user.role_id', 'roles.id')
             ->select('users.id', 'users.name', 'users.email', 'users.phone', 'users.cin', 'users.matriculation', 'roles.display_name as role_display_name')
+            ->where('users.id', $id)
+            ->first();
+    }
+
+    public static function getAdmin($id)
+    {
+        return User::join('role_user', 'users.id', 'role_user.user_id')
+            ->join('roles', 'role_user.role_id', 'roles.id')
+            ->select('users.id', 'users.name', 'users.email', 'users.phone', 'users.cin', 'users.matriculation', 'roles.display_name as role_display_name')
+            ->where('users.id', $id)
+            ->where('roles.name', 'admin')
             ->first();
     }
 
@@ -109,6 +120,26 @@ class User extends Authenticatable
         return User::join('role_user', 'users.id', 'role_user.user_id')
             ->join('roles', 'role_user.role_id', 'roles.id')
             ->select('users.id as user_id', 'users.name as user_name', 'users.email as user_email', 'users.confirmed as user_confirmed', 'roles.display_name as role_display_name')
+            ->OrderBy('users.created_at', 'DESC')
+            ->paginate($limit);
+    }
+
+    public static function getAdminsShortList($limit = 15)
+    {
+        return User::join('role_user', 'users.id', 'role_user.user_id')
+            ->join('roles', 'role_user.role_id', 'roles.id')
+            ->select('users.id as admin_id', 'users.name as admin_name', 'users.email as admin_email', 'users.confirmed as admin_confirmed', 'roles.display_name as role_display_name')
+            ->where('roles.name', 'admin')
+            ->OrderBy('users.created_at', 'DESC')
+            ->paginate($limit);
+    }
+
+    public static function getStudentsShortList($limit = 15)
+    {
+        return User::join('role_user', 'users.id', 'role_user.user_id')
+            ->join('roles', 'role_user.role_id', 'roles.id')
+            ->select('users.id as admin_id', 'users.name as admin_name', 'users.email as admin_email', 'users.confirmed as admin_confirmed', 'roles.display_name as role_display_name')
+            ->where('roles.name', 'student')
             ->OrderBy('users.created_at', 'DESC')
             ->paginate($limit);
     }

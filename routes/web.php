@@ -25,6 +25,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::group(['prefix' => 'etudiant', 'as' => 'student.', 'namespace' => 'Student', 'middleware' => ['role:student']], function () {
 
     // Dashboard
+    Route::get('/', 'DashboardController');
     Route::get('dashboard', 'DashboardController')->name('dashboard');
 
     Route::resource('codifications', 'CodificationController');
@@ -40,9 +41,10 @@ Route::group(['prefix' => 'etudiant', 'as' => 'student.', 'namespace' => 'Studen
 Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'middleware' => ['role:admin']], function () {
 
     // Dashboard
+    Route::get('/', 'DashboardController');
     Route::get('dashboard', 'DashboardController')->name('dashboard');
 
-    Route::resource('admins', 'AdminController');
+    Route::resource('admins', 'AdminController', ['except' => 'edit', 'update', 'destroy']);
     Route::resource('batiments', 'BlockController');
     Route::resource('directeurs-batiment', 'BlockDirectorController');
     Route::resource('codifications', 'CodificationController');
@@ -59,6 +61,6 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
     Route::resource('positions', 'PositionController');
     Route::resource('reservations', 'ReservationController');
     Route::resource('chambres', 'RoomController');
-    Route::resource('etudiants', 'StudentController');
+    Route::resource('etudiants', 'StudentController', ['only' => ['index', 'show']]);
     Route::resource('utilisateurs', 'UserController');
 });

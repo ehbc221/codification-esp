@@ -25,6 +25,7 @@ class CreateCodificationsTable extends Migration
             $table->foreign('position_id')->references('id')->on('positions')->onDelete('cascade');
 
             $table->unique(['codification_periode_id', 'student_id']);
+            $table->unique(['codification_periode_id', 'position_id']);
         });
     }
 

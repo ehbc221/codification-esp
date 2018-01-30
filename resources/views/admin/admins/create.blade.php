@@ -3,7 +3,7 @@
 @section('content')
     <div class="row">
         <div class="col-md-12">
-        {!! Form::open(['route' => 'admin.utilisateurs.store', 'method' => 'post', 'class' => 'form-horizontal']) !!}
+        {!! Form::open(['route' => 'admin.admins.store', 'method' => 'post', 'class' => 'form-horizontal']) !!}
         {!! Form::token() !!}
         <!-- START panel-->
             <div class="panel panel-info">
@@ -136,7 +136,7 @@
                                 <button type="submit" class="btn btn-primary"><i class="fa fa-plus-circle"></i> Ajouter</button>
                             </div>
                             <div class="col-sm-2 col-sm-offset-3">
-                                <a href="{{ route('admin.utilisateurs.index') }}"><div class="btn btn-default" data-toggle="tooltip" data-placement="top" title="Liste des utilisateurs"><i class="fa fa-list"></i> Liste des utilisateurs</div></a>
+                                <a href="{{ route('admin.admins.index') }}"><div class="btn btn-default" data-toggle="tooltip" data-placement="top" title="Liste des admins"><i class="fa fa-list"></i> Liste des admins</div></a>
                             </div>
                         </div>
                     </div>

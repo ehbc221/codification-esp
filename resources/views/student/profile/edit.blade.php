@@ -14,7 +14,7 @@
                 <div class="panel-body">
                     <div class="row">
 
-                        {!! Form::model($student, ['route' => ['student.profil.update', $student->id], 'method' => 'put', 'class' => 'form-horizontal']) !!}
+                        {!! Form::model($student, ['route' => ['student.profil.update', $student->user_id], 'method' => 'put', 'class' => 'form-horizontal']) !!}
                         {!! Form::token() !!}
                         {!! Form::hidden('id', $student->id) !!}
                         {!! Form::hidden('user_id', $student->user_id) !!}

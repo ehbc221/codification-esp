@@ -10,6 +10,11 @@
                         <small>{{ $action_name }}</small>
                     </span>
                 </div>
+                <div class="col-md-12">
+                    <div class="col-md-1 col-md-offset-11">
+                        <a href="{{ route('admin.admins.create') }}"><button class="btn btn-info"><i class="fa fa-plus"></i> Ajouter</button></a>
+                    </div>
+                </div>
             </div>
         </div>
         <div class="panel-body">
@@ -25,7 +30,7 @@
                             <th class="col-md-1">Actions</th>
                         </tr>
                     </thead>
-                    @if($students->isEmpty())
+                    @if($admins->isEmpty())
                         <tbody>
                         <tr>
                             <td colspan="6">
@@ -35,24 +40,25 @@
                         </tbody>
                     @else
                         <tbody>
-                        @foreach($students as $student)
+                        @foreach($admins as $admin)
                             <tr>
-                                <td>{{ $student->admin_id }}</td>
-                                <td>{{ $student->admin_name }}</td>
-                                <td>{{ $student->admin_email }}</td>
-                                <td>{{ ($student->admin_confirmed) ? 'Oui' : 'Non' }}</td>
-                                <td>{{ $student->role_display_name }}</td>
+                                <td>{{ $admin->admin_id }}</td>
+                                <td>{{ $admin->admin_name }}</td>
+                                <td>{{ $admin->admin_email }}</td>
+                                <td>{{ ($admin->admin_confirmed) ? 'Oui' : 'Non' }}</td>
+                                <td>{{ $admin->role_display_name }}</td>
                                 <td class="forms-delete">
                                     <span>
-                                        <a href="{{ route('admin.etudiants.show', ['id' => $student->admin_id]) }}"><span class="btn btn-default" title="Voir"><i class="fa fa-eye"></i> Voir</span></a>
+                                        <a href="{{ route('admin.admins.show', ['id' => $admin->admin_id]) }}"><span class="btn btn-default" title="Voir"><i class="fa fa-eye"></i> Voir</span></a>
                                     </span>
+                                    {!! Form::close() !!}
                                 </td>
                             </tr>
                         @endforeach
                         </tbody>
                         <tfoot class="bg-gray-lighter">
                             <tr>
-                                <td class="text text-center" colspan="6">{{ $students->links() }}</td>
+                                <td class="text text-center" colspan="6">{{ $admins->links() }}</td>
                             </tr>
                         </tfoot>
                     @endif

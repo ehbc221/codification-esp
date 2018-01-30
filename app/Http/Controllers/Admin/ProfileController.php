@@ -1,11 +1,10 @@
 <?php
 
-namespace App\Http\Controllers\Student;
+namespace App\Http\Controllers\Admin;
 
 use App\Grade;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\StudentProfileRequest;
-use App\Student;
+use App\Http\Requests\AdminProfileRequest;
 use App\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\View;
@@ -30,12 +29,12 @@ class ProfileController extends Controller
             return response('Vous n\'avez pas accès à cett ressource.', 501);
         }
 
-        $student = Student::getStudentProfile($id);
-        $grade = Grade::getGrade($student->grade_id);
-        $student['grade'] = $grade->grade_number . ' (' . $grade->department_name . ' - ' . $grade->formation_name . ')';
+        $admin = User::getUser($id);
+        $grade = Grade::getGrade($admin->grade_id);
+        $admin['grade'] = $grade->grade_number . ' (' . $grade->department_name . ' - ' . $grade->formation_name . ')';
 
         $action_name = 'Voir';
-        return view('student.profile.show', compact(['action_name', 'student']));
+        return view('admin.profile.show', compact(['action_name', 'admin']));
     }
 
     /**
@@ -50,30 +49,29 @@ class ProfileController extends Controller
             return response('Vous n\'avez pas accès à cett ressource.', 501);
         }
 
-        $student = Student::getStudentProfile($id);
-        $student['is_foreign'] = ($student['is_foreign']) ? 'oui' : 'non';
+        $admin = User::getUser($id);
+        $admin['is_foreign'] = ($admin['is_foreign']) ? 'oui' : 'non';
         $grades = Grade::getGradesOptionListToArray();
         $sexes = ['Masculin' => 'Masculin', 'Féminin' => 'Féminin'];
 
         $action_name = 'Modifier';
-        return view('student.profile.edit', compact(['action_name', 'student', 'grades', 'sexes']));
+        return view('admin.profile.edit', compact(['action_name', 'admin', 'grades', 'sexes']));
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param StudentProfileRequest $request
      * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function update(StudentProfileRequest $request, $id)
+    public function update(AdminProfileRequest $request, $id)
     {
         if (Auth::user()->id != $id) {
             return response('Vous n\'avez pas accès à cett ressource.', 501);
         }
 
         $user = User::findOrFail($request->input('user_id'));
-        $student = Student::findOrFail($id);
+        $admin = User::findOrFail($id);
 
         // Save User
         $input = [
@@ -86,7 +84,7 @@ class ProfileController extends Controller
         if (isset($request['password']) && !empty($request['password'])) $input['password'] = bcrypt($request['password']);
         $user->update($input);
 
-        // Save Student
+        // Save Admin
         $input = [
             'date_of_birth' => new Date($request['date_of_birth']),
             'place_of_birth' => $request['place_of_birth'],
@@ -95,9 +93,9 @@ class ProfileController extends Controller
             'is_foreign' => ($request['is_foreign'] === 'oui') ? true : false,
             'native_country' => $request['native_country']
         ];
-        $student->update($input);
+        $admin->update($input);
 
-        return redirect()->route('student.profil.show', ['id' => $id])
+        return redirect()->route('admin.profil.show', ['id' => $id])
             ->with('success', 'Compte modifié avec succès.');
     }
 }

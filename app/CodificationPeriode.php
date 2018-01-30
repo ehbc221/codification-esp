@@ -32,10 +32,17 @@ class CodificationPeriode extends Model
 
     public static function getCurrentCodificationPeriode()
     {
-        return CodificationPeriode::select('id')
+        return CodificationPeriode::select('id', 'name')
             ->where('start_date', '<', now())
             ->where('end_date', '>', now())
             ->first();
+    }
+
+    public static function getCurrentCodificationPeriodeToArray()
+    {
+        $codification_periode = CodificationPeriode::getCurrentCodificationPeriode();
+        $codification_periode = [$codification_periode->id => $codification_periode->name];
+        return $codification_periode;
     }
 
     public static function getCodificationPeriodesOptionList()
