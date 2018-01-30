@@ -11,13 +11,13 @@
                             <!-- User picture-->
                             <div class="user-block-picture">
                                 <div class="user-block-status">
-                                    <img src="{{ asset('angle/app/img/user/user.jpg') }}" alt="Avatar" width="60" height="60" class="img-thumbnail img-circle">
+                                    <a href="{{ route('admin.profil.show', ['id' => Auth::user()->id]) }}"><img src="{{ asset('angle/app/img/user/user.jpg') }}" alt="Avatar" width="60" height="60" class="img-thumbnail img-circle"></a>
                                     <div class="circle circle-success circle-lg"></div>
                                 </div>
                             </div>
                             <!-- Name and Job-->
                             <div class="user-block-info">
-                                <span class="user-block-name">{{ auth()->user()->name }}</span>
+                                <span class="user-block-name"><a href="{{ route('admin.profil.show', ['id' => Auth::user()->id]) }}">{{ auth()->user()->name }}</a></span>
                                 <span class="user-block-role">{{ auth()->user()->role->display_name }}</span>
                                 <span class="text text-danger">
                                     <a href="{{ route('logout') }}" onclick="event.preventDefault();
@@ -37,12 +37,18 @@
                 <!-- END user info-->
                 <!-- Iterates over all sidebar items-->
                 <li class="nav-heading ">
-                    <span data-localize="sidebar.heading.HEADER">Main Navigation</span>
+                    <span data-localize="sidebar.heading.HEADER">Navigation Principale</span>
                 </li>
                 <li class=" ">
                     <a href="{{ route('admin.dashboard') }}" title="Dashboard">
                         <em class="icon-speedometer"></em>
                         <span data-localize="sidebar.nav.DASHBOARD">Dashboard</span>
+                    </a>
+                </li>
+                <li class=" ">
+                    <a href="{{ route('admin.profil.show', ['id' => Auth::user()->id]) }}" title="Mon Compte">
+                        <em class="icon-user"></em>
+                        <span data-localize="sidebar.nav.ACCOUNT">Mon Compte</span>
                     </a>
                 </li>
                 <li class="nav-heading ">

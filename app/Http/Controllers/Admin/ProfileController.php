@@ -2,9 +2,8 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Grade;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\AdminProfileRequest;
+use App\Http\Requests\UserRequest;
 use App\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\View;
@@ -29,12 +28,10 @@ class ProfileController extends Controller
             return response('Vous n\'avez pas accès à cett ressource.', 501);
         }
 
-        $admin = User::getUser($id);
-        $grade = Grade::getGrade($admin->grade_id);
-        $admin['grade'] = $grade->grade_number . ' (' . $grade->department_name . ' - ' . $grade->formation_name . ')';
+        $user = User::getUser($id);
 
         $action_name = 'Voir';
-        return view('admin.profile.show', compact(['action_name', 'admin']));
+        return view('admin.profile.show', compact(['action_name', 'user']));
     }
 
     /**
@@ -49,29 +46,26 @@ class ProfileController extends Controller
             return response('Vous n\'avez pas accès à cett ressource.', 501);
         }
 
-        $admin = User::getUser($id);
-        $admin['is_foreign'] = ($admin['is_foreign']) ? 'oui' : 'non';
-        $grades = Grade::getGradesOptionListToArray();
-        $sexes = ['Masculin' => 'Masculin', 'Féminin' => 'Féminin'];
+        $user = User::getUser($id);
 
         $action_name = 'Modifier';
-        return view('admin.profile.edit', compact(['action_name', 'admin', 'grades', 'sexes']));
+        return view('admin.profile.edit', compact(['action_name', 'user']));
     }
 
     /**
      * Update the specified resource in storage.
      *
+     * @param UserRequest $request
      * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function update(AdminProfileRequest $request, $id)
+    public function update(UserRequest $request, $id)
     {
         if (Auth::user()->id != $id) {
             return response('Vous n\'avez pas accès à cett ressource.', 501);
         }
 
-        $user = User::findOrFail($request->input('user_id'));
-        $admin = User::findOrFail($id);
+        $user = User::findOrFail($id);
 
         // Save User
         $input = [
@@ -84,7 +78,7 @@ class ProfileController extends Controller
         if (isset($request['password']) && !empty($request['password'])) $input['password'] = bcrypt($request['password']);
         $user->update($input);
 
-        // Save Admin
+        // Save User
         $input = [
             'date_of_birth' => new Date($request['date_of_birth']),
             'place_of_birth' => $request['place_of_birth'],
@@ -93,7 +87,7 @@ class ProfileController extends Controller
             'is_foreign' => ($request['is_foreign'] === 'oui') ? true : false,
             'native_country' => $request['native_country']
         ];
-        $admin->update($input);
+        $user->update($input);
 
         return redirect()->route('admin.profil.show', ['id' => $id])
             ->with('success', 'Compte modifié avec succès.');

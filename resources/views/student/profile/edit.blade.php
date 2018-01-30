@@ -21,7 +21,6 @@
 
                         <fieldset>
                             <legend class="col-md-8 col-md-offset-2">Compte</legend>
-                            <p>{{ ($errors) ? $errors : '' }}</p>
                             <div class="col-md-8 col-md-offset-2 col-sm-12">
                                 <div class="form-group  {{ $errors->has('name') ? ' has-error' : '' }}">
                                     {!!  Form::label('name', 'Nom <em class="text text-danger">*</em>', ['class' => 'col-md-2 col-sm-2 control-label'], false) !!}

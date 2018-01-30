@@ -59,6 +59,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
     Route::resource('niveaux', 'GradeController');
     Route::resource('couloirs', 'LaneController');
     Route::resource('positions', 'PositionController');
+    Route::resource('profil', 'ProfileController', ['only' => ['show', 'edit', 'update']]);
     Route::resource('reservations', 'ReservationController');
     Route::resource('chambres', 'RoomController');
     Route::resource('etudiants', 'StudentController', ['only' => ['index', 'show']]);
