@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Auth;
 
 class Student extends Model
 {
@@ -57,6 +58,11 @@ class Student extends Model
         $student = Student::getStudent($id);
         $student = [$student->id => $student->name];
         return $student;
+    }
+
+    public static function isOwner($id)
+    {
+        return (Auth::user()->id === $id);
     }
 
 }

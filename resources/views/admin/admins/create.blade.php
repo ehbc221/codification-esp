@@ -65,9 +65,9 @@
                         </div>
                         <div class="col-md-8 col-md-offset-2 col-sm-12">
                             <div class="form-group  {{ $errors->has('phone') ? ' has-error' : '' }}">
-                                {!!  Form::label('phone', 'Téléphone <em class="text text-danger">*</em>', ['class' => 'col-md-2 col-sm-2 control-label'], false) !!}
+                                {!!  Form::label('phone', 'Téléphone', ['class' => 'col-md-2 col-sm-2 control-label']) !!}
                                 <div class="col-md-6 col-sm-10">
-                                    {!! Form::text('phone', null, ['class' => 'form-control', 'id' => 'phone', 'value' => old('phone'), 'required' => 'required']) !!}
+                                    {!! Form::text('phone', null, ['class' => 'form-control', 'id' => 'phone', 'value' => old('phone')]) !!}
 
                                     @if ($errors->has('phone'))
                                         <div class="help-block">

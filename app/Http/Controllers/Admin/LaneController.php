@@ -24,7 +24,7 @@ class LaneController extends Controller
     {
         $lanes = Lane::getLanesShortList();
         foreach ($lanes as $lane) {
-            $lane['floor_number'] = $lane['floor_number'] . ' (' . $lane['block_name'] . ')';
+            $lane['floor_number'] = $lane['block_name'] . ' - Étage ' . $lane['floor_number'];
         }
 
         $action_name = 'Liste';
@@ -38,10 +38,14 @@ class LaneController extends Controller
      */
     public function create()
     {
+        $lanes = [
+            'Droite' => 'Droite',
+            'Gauche' => 'Gauche'
+        ];
         $floors = Floor::getFloorsOptionListToArray();
 
         $action_name = 'Ajouter';
-        return view('admin.lanes.create', compact(['action_name', 'floors']));
+        return view('admin.lanes.create', compact(['action_name', 'lanes', 'floors']));
     }
 
     /**
@@ -72,7 +76,7 @@ class LaneController extends Controller
     public function show($id)
     {
         $lane = Lane::getLane($id);
-        $lane['floor_number'] = $lane['floor_number'] . ' (' . $lane['block_name'] . ')';
+        $lane['floor_number'] = $lane['block_name'] . ' - Étage ' . $lane['floor_number'];
 
         $success = (session('success')) ? session('success') : null;
 
@@ -91,10 +95,14 @@ class LaneController extends Controller
     {
         $lane = Lane::findOrFail($id);
 
+        $lanes = [
+            'Droite' => 'Droite',
+            'Gauche' => 'Gauche'
+        ];
         $floors = Floor::getFloorsOptionListToArray();
 
         $action_name = 'Modifier';
-        return view('admin.lanes.edit', compact(['action_name', 'lane', 'floors']));
+        return view('admin.lanes.edit', compact(['action_name', 'lane', 'lanes', 'floors']));
     }
 
     /**

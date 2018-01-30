@@ -16,6 +16,7 @@
 
                         {!! Form::model($codification_periode, ['route' => ['admin.periodes-codifications.update', $codification_periode->id], 'method' => 'put', 'class' => 'form-horizontal']) !!}
                         {!! Form::token() !!}
+                        {!! Form::hidden('id', $codification_periode->id) !!}
 
                         <div class="col-md-8 col-md-offset-2 col-sm-12">
                             <div class="form-group  {{ ($errors->has('school_year_start') || $errors->has('school_year_end')) ? ' has-error' : '' }}">

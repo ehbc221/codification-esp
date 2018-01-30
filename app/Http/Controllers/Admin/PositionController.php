@@ -24,7 +24,7 @@ class PositionController extends Controller
     {
         $positions = Position::getPositionsShortList();
         foreach ($positions as $position) {
-            $position['room_number'] = $position['room_number'] . ' (' . $position['block_name'] . ' - ' . $position['floor_number'] . ' - ' . $position['lane_name'] . ')';
+            $position['room_number'] = $position['block_name'] . ' - Étage ' . $position['floor_number'] . ' - Couloir ' . $position['lane_name'] . ' - Chambre ' . $position['room_number'];
         }
 
         $action_name = 'Liste';
@@ -72,7 +72,7 @@ class PositionController extends Controller
     public function show($id)
     {
         $position = Position::getPosition($id);
-        $position['room_number'] = $position['room_number'] . ' (' . $position['block_name'] . ' - ' . $position['floor_number'] . ' - ' . $position['lane_name'] . ')';
+        $position['room_number'] = $position['block_name'] . ' - Étage ' . $position['floor_number'] . ' - Couloir ' . $position['lane_name'] . ' - Chambre ' . $position['room_number'];
 
         $success = (session('success')) ? session('success') : null;
 

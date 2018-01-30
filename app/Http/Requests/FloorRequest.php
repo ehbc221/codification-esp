@@ -38,6 +38,7 @@ class FloorRequest extends FormRequest
                     return [
                         'number' => [
                             'required',
+                            'integer',
                             Rule::unique('floors')->where(function ($query) use($request) {
                                 return $query->where('block_id', $request->input('block_id'));
                             }),
@@ -51,6 +52,7 @@ class FloorRequest extends FormRequest
                     return [
                         'number' => [
                             'required',
+                            'integer',
                             Rule::unique('floors')->where(function ($query) use($request) {
                                 return $query->where('block_id', $request->input('block_id'));
                             }),

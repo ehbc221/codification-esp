@@ -58,7 +58,8 @@ class AdminController extends Controller
             'password' => bcrypt($request['password']),
             'phone' => $request['phone'],
             'cin' => $request['cin'],
-            'matriculation' => $request['matriculation']
+            'matriculation' => $request['matriculation'],
+            'confirmed' => true
         ];
 
         $admin = User::create($input);

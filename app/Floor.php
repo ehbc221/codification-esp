@@ -50,7 +50,7 @@ class Floor extends Model
     {
         $floors = Floor::getFloorsOptionList();
         $floors = $floors->mapWithKeys(function ($item) {
-            return [$item['id'] => $item['floor_number'] . ' (' . $item['block_name'] . ')'];
+            return [$item['id'] => $item['block_name'] . ' - Étage ' . $item['floor_number']];
         })->toArray();
         return $floors;
     }

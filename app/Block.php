@@ -25,7 +25,7 @@ class Block extends Model
     public static function getBlocksShortList($limit = 15)
     {
         return Block::select('id', 'name')
-            ->OrderBy('created_at', 'DESC')
+            ->OrderBy('name', 'ASC')
             ->withCount('floors')
             ->paginate($limit);
     }

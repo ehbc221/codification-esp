@@ -38,7 +38,7 @@ class StudentController extends Controller
     {
         $student = Student::getStudentProfile($id);
         $grade = Grade::getGrade($student->grade_id);
-        $student['grade'] = $grade->grade_number . ' (' . $grade->department_name . ' - ' . $grade->formation_name . ')';
+        $student['grade'] = $grade->department_name . ' - ' . $grade->formation_name . ' - ' . $grade->grade_number;
 
         $success = (session('success')) ? session('success') : null;
 

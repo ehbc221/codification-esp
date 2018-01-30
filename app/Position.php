@@ -60,7 +60,7 @@ class Position extends Model
             ->OrderBy('blocks.name', 'ASC')
             ->OrderBy('floors.number', 'ASC')
             ->OrderBy('rooms.number', 'ASC')
-            ->orDerBy('positions.number', 'DESC')
+            ->orDerBy('positions.number', 'ASC')
             ->paginate($limit);
     }
 

@@ -27,6 +27,7 @@ class LaneRequest extends FormRequest
      */
     public function rules(Request $request)
     {
+        $lanes = ['Gauche', 'Droite'];
         switch($this->method()) {
             case 'GET':
             case 'DELETE':
@@ -38,6 +39,7 @@ class LaneRequest extends FormRequest
                     return [
                         'name' => [
                             'required',
+                            Rule::in($lanes),
                             Rule::unique('lanes')->where(function ($query) use($request) {
                                 return $query->where('floor_id', $request->input('floor_id'));
                             }),
@@ -51,6 +53,7 @@ class LaneRequest extends FormRequest
                     return [
                         'name' => [
                             'required',
+                            Rule::in($lanes),
                             Rule::unique('lanes')->where(function ($query) use($request) {
                                 return $query->where('floor_id', $request->input('floor_id'));
                             }),

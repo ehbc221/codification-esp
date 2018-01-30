@@ -23,8 +23,8 @@
                     <thead class="bg-info-light">
                     <tr>
                         <th class="col-md-1">Id</th>
-                        <th class="col-md-4">Numéro</th>
-                        <th class="col-md-4">Chambre</th>
+                        <th class="col-md-2">Numéro</th>
+                        <th class="col-md-6">Chambre</th>
                         <th class="col-md-3">Actions</th>
                     </tr>
                     </thead>
@@ -42,7 +42,7 @@
                             <tr>
                                 <td>{{ $position->id }}</td>
                                 <td>
-                                    <div class="col-md-10 col-md-offset-2">{{ $position->position_number }}</div>
+                                    <div class="col-md-11 col-md-offset-1">{{ $position->position_number }}</div>
                                 </td>
                                 <td>{{ $position->room_number }}</td>
                                 <td class="forms-delete">

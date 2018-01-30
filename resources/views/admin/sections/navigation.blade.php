@@ -51,12 +51,6 @@
                     <span data-localize="sidebar.heading.USERS">Utilisateurs</span>
                 </li>
                 <li class=" ">
-                    <a href="{{ route('admin.utilisateurs.index') }}" title="Comptes">
-                        <em class="fa fa-globe"></em>
-                        <span data-localize="sidebar.nav.ACCOUNTS">Comptes</span>
-                    </a>
-                </li>
-                <li class=" ">
                     <a href="{{ route('admin.admins.index') }}" title="Admins">
                         <em class="fa fa-lock"></em>
                         <span data-localize="sidebar.nav.ADMINS">Admins</span>
@@ -129,6 +123,12 @@
                     <a href="{{ route('admin.periodes-codifications.index') }}" title="Codification">
                         <em class="fa fa-calendar"></em>
                         <span data-localize="sidebar.nav.DOCUMENTATION">Périodes Codification</span>
+                    </a>
+                </li>
+                <li class=" ">
+                    <a href="{{ route('admin.contraintes.index') }}" title="Contraintes">
+                        <em class="fa fa-chain"></em>
+                        <span data-localize="sidebar.nav.DOCUMENTATION">Contraintes</span>
                     </a>
                 </li>
                 <li class=" ">

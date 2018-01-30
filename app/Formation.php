@@ -51,7 +51,7 @@ class Formation extends Model
     {
         $formations = Formation::getFormationsOptionList();
         $formations = $formations->mapWithKeys(function ($item) {
-            return [$item['id'] => $item['name'] = $item['formation_name'] . ' (' . $item['department_name'] . ')'];
+            return [$item['id'] => $item['name'] = $item['department_name'] . ' - ' . $item['formation_name']];
         })->toArray();
         return $formations;
     }

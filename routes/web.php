@@ -63,5 +63,4 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
     Route::resource('reservations', 'ReservationController');
     Route::resource('chambres', 'RoomController');
     Route::resource('etudiants', 'StudentController', ['only' => ['index', 'show']]);
-    Route::resource('utilisateurs', 'UserController');
 });

@@ -42,7 +42,7 @@ class UserRequest extends FormRequest
                         'name' => 'required|min:6|max:255',
                         'email' => 'required|email|unique:users',
                         'password' => 'required|min:8',
-                        'phone' => 'required|unique:users|min:9',
+                        'phone' => 'nullable|unique:users|min:9',
                         'cin' => 'required|unique:users',
                         'matriculation' => 'required|unique:users',
                         'role' => [
@@ -63,7 +63,7 @@ class UserRequest extends FormRequest
                         'password' => 'nullable|min:8|confirmed',
                         'password_confirmation' => 'required_with_all:password|same:password',
                         'phone' => [
-                            'required',
+                            'nullable',
                             'min:9',
                             Rule::unique('users')->ignore($request->input('id'))
                         ],

@@ -23,8 +23,8 @@
                     <thead class="bg-info-light">
                     <tr>
                         <th class="col-md-1">Id</th>
-                        <th class="col-md-4">Numéro</th>
-                        <th class="col-md-4">Formation</th>
+                        <th class="col-md-3">Numéro</th>
+                        <th class="col-md-5">Formation</th>
                         <th class="col-md-3">Actions</th>
                     </tr>
                     </thead>
@@ -42,8 +42,8 @@
                             <tr>
                                 <td>{{ $grade->id }}</td>
                                 <td>
-                                    <div class="col-md-2"><span class="badge bg-gray-light">{{ $grade->students_count }} Étudiants</span></div>
-                                    <div class="col-md-10">{{ $grade->grade_number }}</div>
+                                    <div class="col-md-3"><span class="badge bg-gray-light">{{ $grade->students_count }} Étudiants</span></div>
+                                    <div class="col-md-9">{{ $grade->grade_number }}</div>
                                 </td>
                                 <td>{{ $grade->formation_name }}</td>
                                 <td class="forms-delete">

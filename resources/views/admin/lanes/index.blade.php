@@ -42,8 +42,8 @@
                             <tr>
                                 <td>{{ $lane->id }}</td>
                                 <td>
-                                    <div class="col-md-2"><span class="badge bg-gray-light">{{ $lane->rooms_count }} Chambres</span></div>
-                                    <div class="col-md-10">{{ $lane->lane_name }}</div>
+                                    <div class="col-md-3"><span class="badge bg-gray-light">{{ $lane->rooms_count }} Chambres</span></div>
+                                    <div class="col-md-9">{{ $lane->lane_name }}</div>
                                 </td>
                                 <td>{{ $lane->floor_number }}</td>
                                 <td class="forms-delete">

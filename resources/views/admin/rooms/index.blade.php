@@ -23,8 +23,8 @@
                     <thead class="bg-info-light">
                     <tr>
                         <th class="col-md-1">Id</th>
-                        <th class="col-md-4">Numéro</th>
-                        <th class="col-md-4">Couloir</th>
+                        <th class="col-md-3">Numéro</th>
+                        <th class="col-md-5">Couloir</th>
                         <th class="col-md-3">Actions</th>
                     </tr>
                     </thead>
@@ -42,8 +42,8 @@
                             <tr>
                                 <td>{{ $room->id }}</td>
                                 <td>
-                                    <div class="col-md-2"><span class="badge bg-gray-light">{{ $room->positions_count }} Positions</span></div>
-                                    <div class="col-md-10">{{ $room->room_number }}</div>
+                                    <div class="col-md-3"><span class="badge bg-gray-light">{{ $room->positions_count }} Positions</span></div>
+                                    <div class="col-md-9">{{ $room->room_number }}</div>
                                 </td>
                                 <td>{{ $room->lane_name }}</td>
                                 <td class="forms-delete">

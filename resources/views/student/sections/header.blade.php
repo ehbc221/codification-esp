@@ -36,9 +36,9 @@
                     </ul>
                 </li>
                 <li><a href="{{ route('student.dashboard') }}"><i class="fa fa-dashboard"></i> Dashboard</a></li>
-                <li><a href="{{ route('student.codifications.index') }}"><i class="fa fa-check-circle"></i> Codification</a></li>
-                <li><a href="{{ route('student.reservations.index') }}"><i class="fa fa-clock-o"></i> Réservation</a></li>
-                <li><a href="{{ route('student.echanges.index') }}"><i class="fa fa-exchange"></i> Échange</a></li>
+                <li><a href="{{ route('student.codifications.index') }}"><i class="fa fa-check-circle"></i> Codifications</a></li>
+                <li><a href="{{ route('student.reservations.index') }}"><i class="fa fa-clock-o"></i> Réservations</a></li>
+                <li><a href="{{ route('student.echanges.index') }}"><i class="fa fa-exchange"></i> Échanges</a></li>
             </ul>
             <!-- END Left navbar-->
             <!-- START Right Navbar-->

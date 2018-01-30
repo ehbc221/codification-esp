@@ -24,7 +24,7 @@ class RoomController extends Controller
     {
         $rooms = Room::getRoomsShortList();
         foreach ($rooms as $room) {
-            $room['lane_name'] = $room['lane_name'] . ' (' . $room['block_name'] . ' - ' . $room['floor_number'] . ')';
+            $room['lane_name'] = $room['block_name'] . ' - Étage ' . $room['floor_number'] . ' - Couloir ' . $room['lane_name'];
         }
 
         $action_name = 'Liste';
@@ -72,7 +72,7 @@ class RoomController extends Controller
     public function show($id)
     {
         $room = Room::getRoom($id);
-        $room['lane_name'] = $room['lane_name'] . ' (' . $room['floor_number'] . ' - ' . $room['block_name'] . ')';
+        $room['lane_name'] = $room['block_name'] . ' - Étage ' . $room['floor_number'] . ' - Couloir ' . $room['lane_name'];
 
         $success = (session('success')) ? session('success') : null;
 

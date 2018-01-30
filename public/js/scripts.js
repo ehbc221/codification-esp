@@ -2,7 +2,7 @@
     HANDLE ALERTS (SUCCESS + ERROR)
  */
 function handleAlerts(has_alert, type, message) {
-    message = (message) ? message : "Le formulaire contient des erreurs. Veuillez vous assurer qu'il est valide.";
+    message = (message) ? message : ((type === 'success') ? 'Succès' : 'Erreur');
     if (has_alert) {
         if (type === 'success') {
             swal(

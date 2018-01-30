@@ -29,7 +29,7 @@
                         <tbody>
                         <tr>
                             <td colspan="6">
-                                <h3 class="text text-center text-danger"><i class="fa fa-info-circle"></i> Aucun admin à afficher.</h3>
+                                <h3 class="text text-center text-danger"><i class="fa fa-info-circle"></i> Aucun student à afficher.</h3>
                             </td>
                         </tr>
                         </tbody>
@@ -37,14 +37,14 @@
                         <tbody>
                         @foreach($students as $student)
                             <tr>
-                                <td>{{ $student->admin_id }}</td>
-                                <td>{{ $student->admin_name }}</td>
-                                <td>{{ $student->admin_email }}</td>
-                                <td>{{ ($student->admin_confirmed) ? 'Oui' : 'Non' }}</td>
+                                <td>{{ $student->student_id }}</td>
+                                <td>{{ $student->student_name }}</td>
+                                <td>{{ $student->student_email }}</td>
+                                <td>{{ ($student->student_confirmed) ? 'Oui' : 'Non' }}</td>
                                 <td>{{ $student->role_display_name }}</td>
                                 <td class="forms-delete">
                                     <span>
-                                        <a href="{{ route('admin.etudiants.show', ['id' => $student->admin_id]) }}"><span class="btn btn-default" title="Voir"><i class="fa fa-eye"></i> Voir</span></a>
+                                        <a href="{{ route('admin.etudiants.show', ['id' => $student->student_id]) }}"><span class="btn btn-default" title="Voir"><i class="fa fa-eye"></i> Voir</span></a>
                                     </span>
                                 </td>
                             </tr>

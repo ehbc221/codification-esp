@@ -45,4 +45,10 @@ class Reservation extends Model
             ->paginate($limit);
     }
 
+    public static function isInCurrentCodificationPeriode($id)
+    {
+        $reservation = Reservation::findOrFail($id);
+        return (CodificationPeriode::isOpened() && ((CodificationPeriode::getCurrentCodificationPeriode())->id === $reservation->id));
+    }
+
 }

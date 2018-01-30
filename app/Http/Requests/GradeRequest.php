@@ -38,6 +38,7 @@ class GradeRequest extends FormRequest
                     return [
                         'number' => [
                             'required',
+                            'integer',
                             Rule::unique('grades')->where(function ($query) use($request) {
                                 return $query->where('formation_id', $request->input('formation_id'));
                             }),
@@ -51,6 +52,7 @@ class GradeRequest extends FormRequest
                     return [
                         'number' => [
                             'required',
+                            'integer',
                             Rule::unique('grades')->where(function ($query) use($request) {
                                 return $query->where('formation_id', $request->input('formation_id'));
                             }),

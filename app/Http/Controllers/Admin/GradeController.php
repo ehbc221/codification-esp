@@ -24,7 +24,7 @@ class GradeController extends Controller
     {
         $grades = Grade::getGradesShortList();
         foreach ($grades as $grade) {
-            $grade['formation_name'] = $grade['formation_name'] . ' (' . $grade['department_name'] . ')';
+            $grade['formation_name'] = $grade['department_name'] . ' - ' . $grade['formation_name'];
         }
 
         $action_name = 'Liste';
@@ -72,7 +72,7 @@ class GradeController extends Controller
     public function show($id)
     {
         $grade = Grade::getGrade($id);
-        $grade['formation_name'] = $grade['formation_name'] . ' (' . $grade['department_name'] . ')';
+        $grade['formation_name'] = $grade['department_name'] . ' - ' . $grade['formation_name'];
 
         $success = (session('success')) ? session('success') : null;
 

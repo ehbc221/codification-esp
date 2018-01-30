@@ -147,7 +147,7 @@ class UsersTableSeeder extends Seeder
                 'name' => $faker->name,
                 'email' => $faker->safeEmail,
                 'password' => bcrypt('passer1234'),
-                'phone' => $faker->phoneNumber,
+                'phone' => ($faker->boolean) ? $faker->phoneNumber : null,
                 'cin' => str_shuffle(trim($faker->text(20))),
                 'matriculation' => str_shuffle(trim($faker->text(20))),
                 'confirmation_code' => \Ramsey\Uuid\Uuid::uuid4(),

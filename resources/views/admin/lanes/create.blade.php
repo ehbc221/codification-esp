@@ -19,7 +19,7 @@
                             <div class="form-group  {{ $errors->has('name') ? ' has-error' : '' }}">
                                 {!!  Form::label('name', 'Nom <em class="text text-danger">*</em>', ['class' => 'col-md-2 col-sm-2 control-label'], false) !!}
                                 <div class="col-md-6 col-sm-10">
-                                    {!! Form::text('name', null, ['class' => 'form-control', 'id' => 'name', 'value' => old('name'), 'required' => 'required', 'autofocus' => 'on']) !!}
+                                    {!! Form::select('name', $lanes, old('name'), ['class' => 'form-control', 'id' => 'name', 'placeholder' => 'Sélectionnez un couloir', 'required' => 'required', 'autofocus' => 'on']) !!}
 
                                     @if ($errors->has('name'))
                                         <div class="help-block">

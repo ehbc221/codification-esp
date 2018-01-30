@@ -11,8 +11,15 @@
                     </span>
                 </div>
                 <div class="col-md-12">
-                    <div class="col-md-1 col-md-offset-10">
-                        <a href="{{ route('student.reservations.create') }}"><button class="btn btn-info"><i class="fa fa-plus"></i> Ajouter</button></a>
+                        @codificationPeriode
+                        <div class="col-md-1 col-md-offset-10">
+                            <a href="{{ route('student.reservations.create') }}"><button class="btn btn-info"><i class="fa fa-plus"></i> Ajouter</button></a>
+                        </div>
+                    @else
+                        <div class="col-md-2 col-md-offset-9">
+                            <button class="btn btn-danger"><i class="fa fa-info-circle"></i> Impossible de réserver maintenant.</button>
+                        </div>
+                    @endcodificationPeriode
                     </div>
                 </div>
             </div>
@@ -80,8 +87,9 @@
         /*
             HANDLE ALERTS (SUCCESS + ERROR)
          */
-        var has_alert_success = "<?php echo session('success') ?>", message_success = "<?php echo session('success'); ?>";
+        var has_alert_success = "<?php echo session('success') ?>", message_success = "<?php echo session('success'); ?>", has_alert_error = "<?php echo session('error') ?>", message_error = "<?php echo session('error'); ?>";
         handleAlerts(has_alert_success, 'success', message_success);
+        handleAlerts(has_alert_error, 'error', message_error);
         /*
             HANDLE THE DELETE FORM
          */

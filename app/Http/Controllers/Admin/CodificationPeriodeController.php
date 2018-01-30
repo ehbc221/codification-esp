@@ -111,8 +111,8 @@ class CodificationPeriodeController extends Controller
             'name' => 'Codification ' . $request['school_year_start'] . '/' . $request['school_year_end'],
             'school_year_start' => $request['school_year_start'],
             'school_year_end' => $request['school_year_end'],
-            'start_date' => $request['start_date'],
-            'end_date' => $request['end_date']
+            'start_date' => new Date($request['start_date']),
+            'end_date' => new Date($request['end_date'])
         ];
 
         $block->update($input);

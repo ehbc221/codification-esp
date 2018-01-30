@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Collection;
 
 class CodificationPeriode extends Model
 {
@@ -40,9 +41,18 @@ class CodificationPeriode extends Model
 
     public static function getCurrentCodificationPeriodeToArray()
     {
+        $codification_periode = new Collection([]);
         $codification_periode = CodificationPeriode::getCurrentCodificationPeriode();
-        $codification_periode = [$codification_periode->id => $codification_periode->name];
+        if ($codification_periode) {
+            $codification_periode = [$codification_periode->id => $codification_periode->name];
+        }
         return $codification_periode;
+    }
+
+    public static function isOpened()
+    {
+        $codification_periode = CodificationPeriode::getCurrentCodificationPeriode();
+        return ($codification_periode) ? true : false;
     }
 
     public static function getCodificationPeriodesOptionList()

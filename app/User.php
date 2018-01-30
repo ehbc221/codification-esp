@@ -17,7 +17,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'phone', 'cin', 'matriculation'
+        'name', 'email', 'password', 'phone', 'cin', 'matriculation', 'confirmed'
     ];
 
     /**
@@ -138,7 +138,8 @@ class User extends Authenticatable
     {
         return User::join('role_user', 'users.id', 'role_user.user_id')
             ->join('roles', 'role_user.role_id', 'roles.id')
-            ->select('users.id as admin_id', 'users.name as admin_name', 'users.email as admin_email', 'users.confirmed as admin_confirmed', 'roles.display_name as role_display_name')
+            ->join('students', 'users.id', 'students.user_id')
+            ->select('users.id as student_id', 'students.id as student_id', 'users.name as student_name', 'users.email as student_email', 'users.confirmed as student_confirmed', 'roles.display_name as role_display_name')
             ->where('roles.name', 'student')
             ->OrderBy('users.created_at', 'DESC')
             ->paginate($limit);
