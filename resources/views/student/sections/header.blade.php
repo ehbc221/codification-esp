@@ -28,14 +28,11 @@
                     <ul class="dropdown-menu animated fadeIn">
                         <li><a href="{{ route('student.profil.show', ['id' => Auth::user()->id]) }}"><i class="fa fa-user"></i> Mon Compte</a></li>
                         <li>
-                            <a href="{{ route('logout') }}" onclick="event.preventDefault();
-                                                                    document.getElementById('logout-form').submit();"
-                               style="color: red;">
-
+                            <a href="{{ route('logout') }}" style="color: red;" id="logout"><span class="text-danger"><i class="fa fa-sign-out"></i> Déconnexion</span></a>
                             <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                 {{ csrf_field() }}
                             </form>
-                            <span class="text-danger"><i class="fa fa-sign-out"></i> Déconnexion</span></a></li>
+                        </li>
                     </ul>
                 </li>
                 <li><a href="{{ route('student.dashboard') }}"><i class="fa fa-dashboard"></i> Dashboard</a></li>
@@ -148,3 +145,13 @@
     </nav>
     <!-- END Top Navbar-->
 </header>
+
+@push('scripts')
+    <script type="text/javascript">
+        /*
+            LOGOUT PROMPT
+        */
+        var logout_link = $('#logout')[0], logout_form = $('#logout-form')[0];
+        handleLogoutForm(logout_form, logout_link);
+    </script>
+@endpush

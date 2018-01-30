@@ -47,3 +47,31 @@ function handleDeleteForm(form_delete, button_delete, title, text) {
         });
     });
 }
+
+/*
+    HANDLE THE DELETE FORM
+ */
+function handleLogoutForm(logout_form, logout_link, title, text) {
+    logout_link.addEventListener('click', function () {
+        event.preventDefault();
+        title = (title) ? title : 'Déconnexion';
+        text = (text) ? text : 'Êtes-vous sûr de vouloir vous déconnecter?';
+        swal({
+            title: title,
+            text: text,
+            type: 'error',
+            showCancelButton: true,
+            confirmButtonColor: '#FF464F',
+            cancelButtonColor: '#2B91EB',
+            confirmButtonText: 'Oui',
+            cancelButtonText: 'Non',
+            confirmButtonClass: 'btn btn-danger',
+            cancelButtonClass: 'btn btn-info',
+            reverseButtons: true
+        }).then(function(result) {
+            if(result.value) {
+                logout_form.submit();
+            }
+        });
+    });
+}

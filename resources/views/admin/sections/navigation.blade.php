@@ -20,11 +20,7 @@
                                 <span class="user-block-name"><a href="{{ route('admin.profil.show', ['id' => Auth::user()->id]) }}">{{ auth()->user()->name }}</a></span>
                                 <span class="user-block-role">{{ auth()->user()->role->display_name }}</span>
                                 <span class="text text-danger">
-                                    <a href="{{ route('logout') }}" onclick="event.preventDefault();
-                                                                    document.getElementById('logout-form').submit();"
-                                                                    style="color: red;">
-                                        <i class="fa fa-sign-out"></i> Déconnexion
-                                    </a>
+                                    <a href="{{ route('logout') }}" style="color: red;" id="logout"><i class="fa fa-sign-out"></i> Déconnexion</a>
 
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                         {{ csrf_field() }}
@@ -162,6 +158,11 @@
 
 @push('scripts')
     <script type="text/javascript">
+        /*
+            LOGOUT PROMPT
+        */
+        var logout_link = $('#logout')[0], logout_form = $('#logout-form')[0];
+        handleLogoutForm(logout_form, logout_link);
         /*
             ADD CLASS ACTIVE TO NAV LI
          */

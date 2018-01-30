@@ -89,10 +89,6 @@
         var forms_delete = $('.forms-delete'), title = 'Êtes-vous sûr de vouloir supprimer cette chambre?', text = 'Vous ne pourrez plus la récuperer!';
         forms_delete.each(function () {
             var form_delete = $(this).find('form')[0], button_delete = $(this).find('form').find('#button-delete')[0];
-            console.log('form_delete ' + form_delete);
-            console.log('button_delete ' + button_delete);
-            console.log('title ' +  title);
-            console.log('text ' + text);
             handleDeleteForm(form_delete, button_delete, title, text);
         });
     </script>
