@@ -30,14 +30,14 @@
                 <!-- START User avatar toggle-->
                 <li>
                     <!-- Button used to collapse the left sidebar. Only visible on tablet and desktops-->
-                    <a id="user-block-toggle" href="#user-block" data-toggle="collapse">
+                    <a id="user-block-toggle" href="#user-block" data-toggle="collapse" title="Détails Utilisateur">
                         <em class="icon-user"></em>
                     </a>
                 </li>
                 <!-- END User avatar toggle-->
                 <!-- START lock screen-->
                 <li>
-                    <a href="lock.html" title="Lock screen">
+                    <a href="{{ route('lock.get') }}" title="Vérouiller">
                         <em class="icon-lock"></em>
                     </a>
                 </li>

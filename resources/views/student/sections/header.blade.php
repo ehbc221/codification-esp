@@ -46,7 +46,7 @@
                 <!-- Search icon-->
                 <!-- START lock screen-->
                 <li class="dropdown">
-                    <a href="lock.html" title="Lock screen">
+                    <a href="{{ route('lock.get') }}" title="Lock screen">
                         <em class="icon-lock"></em>
                     </a>
                 </li>

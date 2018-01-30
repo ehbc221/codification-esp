@@ -11,18 +11,23 @@
 |
 */
 
-Route::get('/accueil', function () {
+
+Route::get('/', function () {
     return view('welcome');
 })->name('accueil');
 
+/**
+ * AUTH
+ */
 Auth::routes();
-
 Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/lock', 'Auth\LockScreenController@get')->name('lock.get');
+Route::post('/lock', 'Auth\LockScreenController@post')->name('lock.post');
 
 /**
  * Student Routes
  */
-Route::group(['prefix' => 'etudiant', 'as' => 'student.', 'namespace' => 'Student', 'middleware' => ['role:student']], function () {
+Route::group(['prefix' => 'etudiant', 'as' => 'student.', 'namespace' => 'Student', 'middleware' => ['auth', 'role:student']], function () {
 
     // Dashboard
     Route::get('/', 'DashboardController');
@@ -38,7 +43,7 @@ Route::group(['prefix' => 'etudiant', 'as' => 'student.', 'namespace' => 'Studen
 /**
  * Admin Routes
  */
-Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'middleware' => ['role:admin']], function () {
+Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'middleware' => ['auth', 'role:admin']], function () {
 
     // Dashboard
     Route::get('/', 'DashboardController');
