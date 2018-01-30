@@ -26,6 +26,7 @@
                 <!-- START panel-->
                 <div class="p">
                     <img src="{{ asset('angle/app/img/user/user.jpg') }}" alt="Avatar" width="60" height="60" class="img-thumbnail img-circle center-block">
+                    <p class="text text-center">{{ Auth::user()->name }}</p>
                 </div>
                 <div class="panel widget b0">
                     <div class="panel-body">
